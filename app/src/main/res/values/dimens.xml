@@ -6,5 +6,6 @@
     <dimen name="margin_regular">16dp</dimen>
 
     <!-- Padding -->
+    <dimen name="padding_small">8dp</dimen>
     <dimen name="padding_extra_large">48dp</dimen>
 </resources>
