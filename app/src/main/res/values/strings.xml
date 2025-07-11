@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">APOD Browser</string>
+
+    <!-- Feature title -->
+    <string name="feature_title_latest">Latest</string>
+    <string name="feature_title_bookmarks">Bookmarks</string>
 </resources>
