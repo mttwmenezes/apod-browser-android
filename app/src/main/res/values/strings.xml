@@ -4,4 +4,15 @@
     <!-- Feature title -->
     <string name="feature_title_latest">Latest</string>
     <string name="feature_title_bookmarks">Bookmarks</string>
+
+    <!-- Content description -->
+    <string name="apod_image_description">Apod\'s image</string>
+
+    <!-- Latest -->
+    <string name="content_description_item_options">Item options</string>
+
+    <!-- Example -->
+    <string name="example_apod_title">Autumn Moon Encore</string>
+    <string name="example_apod_media_type">Image</string>
+    <string name="example_apod_date">December 15, 2005</string>
 </resources>

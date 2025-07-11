@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:foreground="?attr/selectableItemBackground"
+    tools:layout_marginVertical="@dimen/margin_small">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/apod_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/colorSurfaceContainerHighest"
+        android:contentDescription="@string/apod_image_description"
+        android:scaleType="centerCrop"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/bm_example_apod" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/error_placeholder"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/colorSurfaceContainerHighest"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_broken_image"
+        android:visibility="gone"
+        app:contentPadding="@dimen/padding_extra_large"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title_label"
+        style="@style/TextAppearance.HeadlineSmall.Latest.Feed.Title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_regular"
+        android:layout_marginTop="@dimen/margin_small"
+        android:ellipsize="end"
+        android:maxLines="2"
+        app:layout_constraintEnd_toStartOf="@+id/options_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/apod_image"
+        tools:text="@string/example_apod_title" />
+
+    <TextView
+        android:id="@+id/media_type_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_extra_small"
+        android:textAppearance="?attr/textAppearanceBodySmall"
+        app:layout_constraintStart_toStartOf="@id/title_label"
+        app:layout_constraintTop_toBottomOf="@id/title_label"
+        tools:text="@string/example_apod_media_type" />
+
+    <View
+        android:id="@+id/info_separator"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/margin_extra_small"
+        android:background="@drawable/circle_separator"
+        android:importantForAccessibility="no"
+        app:layout_constraintBottom_toBottomOf="@id/media_type_label"
+        app:layout_constraintStart_toEndOf="@id/media_type_label"
+        app:layout_constraintTop_toTopOf="@id/media_type_label" />
+
+    <TextView
+        android:id="@+id/date_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_extra_small"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="?attr/textAppearanceBodySmall"
+        app:layout_constraintBottom_toBottomOf="@id/media_type_label"
+        app:layout_constraintEnd_toEndOf="@+id/title_label"
+        app:layout_constraintStart_toEndOf="@id/info_separator"
+        app:layout_constraintTop_toTopOf="@id/media_type_label"
+        tools:text="@string/example_apod_date" />
+
+    <Button
+        android:id="@+id/options_button"
+        style="?attr/materialIconButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_extra_small"
+        android:contentDescription="@string/content_description_item_options"
+        app:icon="@drawable/ic_more_vert"
+        app:iconTint="?colorControlNormal"
+        app:layout_constraintBottom_toBottomOf="@+id/media_type_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/title_label" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
