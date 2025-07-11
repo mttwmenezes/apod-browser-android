@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/latest">
+    <fragment
+        android:id="@+id/latest"
+        android:name="com.github.mttwmenezes.apodbrowser.feature.latest.view.LatestFragment"
+        android:label="@string/feature_title_latest"
+        tools:layout="@layout/fragment_latest" />
+    <fragment
+        android:id="@+id/bookmarks"
+        android:name="com.github.mttwmenezes.apodbrowser.feature.bookmarks.view.BookmarksFragment"
+        android:label="@string/feature_title_bookmarks"
+        tools:layout="@layout/fragment_bookmarks" />
+</navigation>

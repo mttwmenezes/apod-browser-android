@@ -4,4 +4,10 @@
         <item name="android:fontFamily">@font/inter_tight</item>
         <item name="fontFamily">@font/inter_tight</item>
     </style>
+
+    <!-- Widget -->
+    <style name="Widget.NavigationBar" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.TitleSmall.MediumWeight</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearance.TitleSmall.MediumWeight</item>
+    </style>
 </resources>
