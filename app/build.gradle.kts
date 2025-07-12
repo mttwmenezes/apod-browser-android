@@ -63,4 +63,8 @@ dependencies {
     // Navigation
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
+
+    // Coil
+    implementation(libs.coil)
+    implementation(libs.coil.network)
 }
