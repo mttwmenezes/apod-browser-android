@@ -11,4 +11,6 @@ data class Apod(
     val explanation: String,
     val thumbnailUrl: String?,
     val copyright: String?
-) : Serializable
+) : Serializable {
+    val isImage get() = mediaType == "image"
+}
