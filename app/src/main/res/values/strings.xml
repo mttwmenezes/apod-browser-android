@@ -13,6 +13,17 @@
     <string name="latest_feed_explore_hint">Discover the cosmos! Dive into APOD\'s vast image library.</string>
     <string name="latest_feed_explore_hint_clickable_text">Dive</string>
 
+    <!-- Date -->
+    <string name="date_today">Today</string>
+    <string name="date_one_year_ago">1 year ago</string>
+    <string name="date_years_ago_format">%d years ago</string>
+    <string name="date_one_month_ago">1 month ago</string>
+    <string name="date_months_ago_format">%d months ago</string>
+    <string name="date_one_week_ago">1 week ago</string>
+    <string name="date_weeks_ago_format">%d weeks ago</string>
+    <string name="date_one_day_ago">1 day ago</string>
+    <string name="date_days_ago_format">%d days ago</string>
+
     <!-- Example -->
     <string name="example_apod_title">Autumn Moon Encore</string>
     <string name="example_apod_media_type">Image</string>
