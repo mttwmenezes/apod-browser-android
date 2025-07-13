@@ -14,6 +14,8 @@ class Date private constructor(val wrapped: LocalDate) {
         Interval.Years -> ChronoUnit.YEARS.between(wrapped, other.wrapped)
     }
 
+    fun minusWeeks(count: Long) = Date(LocalDate.now().minusWeeks(count))
+
     enum class Interval {
         Days,
         Weeks,

@@ -1,5 +1,7 @@
 package com.github.mttwmenezes.apodbrowser.data.model
 
+import com.github.mttwmenezes.apodbrowser.feature.other.extension.newLineTrimmed
+import com.github.mttwmenezes.apodbrowser.infrastructure.network.response.ApodResponse
 import java.io.Serializable
 
 data class Apod(
@@ -14,3 +16,14 @@ data class Apod(
 ) : Serializable {
     val isImage get() = mediaType == "image"
 }
+
+fun ApodResponse.toApod() = Apod(
+    title = title.orEmpty().newLineTrimmed(),
+    date = date.orEmpty(),
+    url = url.orEmpty(),
+    hdUrl = hdUrl,
+    mediaType = mediaType.orEmpty(),
+    explanation = explanation.orEmpty().newLineTrimmed(),
+    thumbnailUrl = thumbnailUrl,
+    copyright = copyright
+)
