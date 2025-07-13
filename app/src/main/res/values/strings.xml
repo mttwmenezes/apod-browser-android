@@ -4,6 +4,7 @@
     <!-- Feature title -->
     <string name="feature_title_latest">Latest</string>
     <string name="feature_title_bookmarks">Bookmarks</string>
+    <string name="feature_title_settings">Settings</string>
 
     <!-- Content description -->
     <string name="apod_image_description">Apod\'s image</string>
@@ -12,6 +13,8 @@
     <string name="content_description_item_options">Item options</string>
     <string name="latest_feed_explore_hint">Discover the cosmos! Dive into APOD\'s vast image library.</string>
     <string name="latest_feed_explore_hint_clickable_text">Dive</string>
+    <string name="action_title_refresh">Refresh</string>
+    <string name="action_title_official_website">Official website</string>
 
     <!-- Date -->
     <string name="date_today">Today</string>
