@@ -8,4 +8,7 @@
     <!-- Padding -->
     <dimen name="padding_small">8dp</dimen>
     <dimen name="padding_extra_large">48dp</dimen>
+
+    <!-- Iconography -->
+    <dimen name="large_icon">48dp</dimen>
 </resources>

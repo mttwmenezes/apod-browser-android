@@ -11,4 +11,9 @@
         <item name="fontFamily">@font/inter_tight_medium</item>
         <item name="android:textSize">20sp</item>
     </style>
+
+    <style name="TextAppearance.HeadlineSmall.MediumWeight" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:fontFamily">@font/inter_tight_medium</item>
+        <item name="fontFamily">@font/inter_tight_medium</item>
+    </style>
 </resources>
