@@ -71,4 +71,7 @@ dependencies {
 
     // Kotlin serialization
     implementation(libs.kotlin.serialization)
+
+    // Retrofit
+    implementation(libs.retrofit)
 }
