@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import retrofit2.Retrofit
@@ -24,4 +25,7 @@ object ViewModelModule {
 
     @Provides
     fun provideApodService(retrofit: Retrofit): ApodService = retrofit.create()
+
+    @Provides
+    fun provideIoDispatcher() = Dispatchers.IO
 }
