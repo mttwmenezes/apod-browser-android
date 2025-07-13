@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -67,4 +68,7 @@ dependencies {
     // Coil
     implementation(libs.coil)
     implementation(libs.coil.network)
+
+    // Kotlin serialization
+    implementation(libs.kotlin.serialization)
 }
