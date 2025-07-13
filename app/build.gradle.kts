@@ -80,4 +80,7 @@ dependencies {
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.kotlin.serialization)
+
+    // SwipeRefreshLayout
+    implementation(libs.androidx.swiperefreshlayout)
 }
