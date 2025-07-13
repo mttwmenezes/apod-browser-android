@@ -1,0 +1,17 @@
+package com.github.mttwmenezes.apodbrowser.infrastructure.network.service
+
+import com.github.mttwmenezes.apodbrowser.BuildConfig
+import com.github.mttwmenezes.apodbrowser.infrastructure.network.response.ApodResponse
+import retrofit2.Response
+import retrofit2.http.GET
+import retrofit2.http.Query
+
+interface ApodService {
+
+    @GET(BuildConfig.ENDPOINT)
+    suspend fun fetchFromDateRange(
+        @Query("api_key") key: String = BuildConfig.PUBLIC_KEY,
+        @Query("start_date") startDate: String,
+        @Query("thumbs") includeThumbnail: Boolean = true
+    ): Response<List<ApodResponse>>
+}
