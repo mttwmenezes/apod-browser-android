@@ -25,9 +25,7 @@ sealed class LatestFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(item
             mediaTypeLabel.text = item.mediaType
             dateLabel.text = item.date
 
-            root.setOnClickListener { onItemClickListener(item.itemId) }
-            root.setOnLongClickListener { root.performClick() }
-            apodImage.setOnClickListener { root.performClick() }
+            rippleOverlay.setOnClickListener { onItemClickListener(item.itemId) }
             optionsButton.setOnClickListener { onItemOptionsClickListener(item.itemId) }
         }
 

@@ -4,8 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:foreground="?attr/selectableItemBackground"
     tools:layout_marginVertical="@dimen/margin_small">
+
+    <View
+        android:id="@+id/ripple_overlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:foreground="?attr/selectableItemBackground"
+        android:importantForAccessibility="no"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/apod_image"
