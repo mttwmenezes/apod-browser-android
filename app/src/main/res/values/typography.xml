@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="TextAppearance.TitleSmall.MediumWeight" parent="TextAppearance.Material3.TitleSmall">
-        <item name="android:fontFamily">@font/inter_tight_medium</item>
-        <item name="fontFamily">@font/inter_tight_medium</item>
+    <style name="TextAppearance.TitleSmall.SemiBold" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:fontFamily">@font/inter_tight_semibold</item>
+        <item name="fontFamily">@font/inter_tight_semibold</item>
     </style>
 
     <style name="TextAppearance.TitleLarge.MediumWeight" parent="TextAppearance.Material3.TitleLarge">

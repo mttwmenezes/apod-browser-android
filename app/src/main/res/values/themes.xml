@@ -7,8 +7,8 @@
 
     <!-- Widget -->
     <style name="Widget.NavigationBar" parent="Widget.Material3.BottomNavigationView">
-        <item name="itemTextAppearanceInactive">@style/TextAppearance.TitleSmall.MediumWeight</item>
-        <item name="itemTextAppearanceActive">@style/TextAppearance.TitleSmall.MediumWeight</item>
+        <item name="itemTextAppearanceInactive">@style/TextAppearance.TitleSmall.SemiBold</item>
+        <item name="itemTextAppearanceActive">@style/TextAppearance.TitleSmall.SemiBold</item>
     </style>
 
     <style name="Widget.CollapsingToolbar.Large" parent="Widget.Material3.CollapsingToolbar.Large">
