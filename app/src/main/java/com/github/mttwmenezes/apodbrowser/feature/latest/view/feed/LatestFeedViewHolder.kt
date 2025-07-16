@@ -7,7 +7,6 @@ import com.github.mttwmenezes.apodbrowser.R
 import com.github.mttwmenezes.apodbrowser.databinding.FeedItemApodBinding
 import com.github.mttwmenezes.apodbrowser.databinding.FeedItemExploreHintBinding
 import com.github.mttwmenezes.apodbrowser.feature.latest.model.LatestFeedItem
-import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.setClickableSpan
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.show
 
@@ -39,7 +38,7 @@ sealed class LatestFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(item
         }
 
         private fun showErrorPlaceholder() = with(binding) {
-            apodImage.hide()
+            apodImage.visibility = View.INVISIBLE
             errorPlaceholder.show()
         }
     }
