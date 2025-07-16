@@ -5,6 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.github.mttwmenezes.apodbrowser.R
 import com.github.mttwmenezes.apodbrowser.databinding.ActivityHomeBinding
@@ -23,11 +24,22 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
         configureNavController()
-        binding.navigationBar.setupWithNavController(navController)
+        configureUi()
     }
 
     private fun configureNavController() {
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         navController = navHost.navController
+    }
+
+    private fun configureUi() = with(binding) {
+        navigationBar.setupWithNavController(navController)
+        collapsingToolbar.setupWithNavController(
+            toolbar = topAppBar,
+            navController = navController,
+            configuration = AppBarConfiguration(
+                topLevelDestinationIds = setOf(R.id.latest, R.id.bookmarks)
+            )
+        )
     }
 }

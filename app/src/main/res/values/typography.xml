@@ -5,6 +5,16 @@
         <item name="fontFamily">@font/inter_tight_medium</item>
     </style>
 
+    <style name="TextAppearance.TitleLarge.MediumWeight" parent="TextAppearance.Material3.TitleLarge">
+        <item name="android:fontFamily">@font/inter_tight_medium</item>
+        <item name="fontFamily">@font/inter_tight_medium</item>
+    </style>
+
+    <style name="TextAppearance.HeadlineMedium.MediumWeight" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:fontFamily">@font/inter_tight_medium</item>
+        <item name="fontFamily">@font/inter_tight_medium</item>
+    </style>
+
     <!-- Latest -->
     <style name="TextAppearance.HeadlineSmall.Latest.Feed.Title" parent="TextAppearance.Material3.HeadlineSmall">
         <item name="android:fontFamily">@font/inter_tight_medium</item>

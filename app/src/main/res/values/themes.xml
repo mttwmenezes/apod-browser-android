@@ -10,4 +10,9 @@
         <item name="itemTextAppearanceInactive">@style/TextAppearance.TitleSmall.MediumWeight</item>
         <item name="itemTextAppearanceActive">@style/TextAppearance.TitleSmall.MediumWeight</item>
     </style>
+
+    <style name="Widget.CollapsingToolbar.Large" parent="Widget.Material3.CollapsingToolbar.Large">
+        <item name="collapsedTitleTextAppearance">@style/TextAppearance.TitleLarge.MediumWeight</item>
+        <item name="expandedTitleTextAppearance">@style/TextAppearance.HeadlineMedium.MediumWeight</item>
+    </style>
 </resources>
