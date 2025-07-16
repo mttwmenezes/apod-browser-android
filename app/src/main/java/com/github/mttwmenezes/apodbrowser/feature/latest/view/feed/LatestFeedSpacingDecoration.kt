@@ -17,7 +17,7 @@ class LatestFeedSpacingDecoration @Inject constructor(
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: State) {
         val position = parent.getChildAdapterPosition(view)
-        outRect.top = if (position == 0) marginExtraSmall else 0
+        outRect.top = if (position == 0) marginSmall else 0
         outRect.bottom = if (isLastItem(position, state)) {
             systemUI.navigationBarHeight + marginRegular
         } else {
@@ -25,8 +25,8 @@ class LatestFeedSpacingDecoration @Inject constructor(
         }
     }
 
-    private val marginExtraSmall
-        get() = context.resources.getDimensionPixelSize(R.dimen.margin_extra_small)
+    private val marginSmall
+        get() = context.resources.getDimensionPixelSize(R.dimen.margin_small)
 
     private val marginRegular
         get() = context.resources.getDimensionPixelSize(R.dimen.margin_regular)
