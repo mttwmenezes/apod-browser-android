@@ -3,12 +3,14 @@ package com.github.mttwmenezes.apodbrowser.feature.home.view
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.github.mttwmenezes.apodbrowser.R
 import com.github.mttwmenezes.apodbrowser.databinding.ActivityHomeBinding
+import com.github.mttwmenezes.apodbrowser.feature.other.extension.setOnQueryTextChangedListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,6 +27,7 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         configureNavController()
         configureUi()
+        configureOnDestinationChangedListener()
     }
 
     private fun configureNavController() {
@@ -41,5 +44,63 @@ class HomeActivity : AppCompatActivity() {
                 topLevelDestinationIds = setOf(R.id.latest, R.id.bookmarks)
             )
         )
+    }
+
+    private fun configureOnDestinationChangedListener() {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.latest -> configureLatestTopAppBarMenu()
+                R.id.bookmarks -> configureBookmarksTopAppBarMenu()
+            }
+        }
+    }
+
+    private fun configureLatestTopAppBarMenu() = with(binding.topAppBar) {
+        menu.clear()
+        inflateMenu(R.menu.latest_top_app_bar_menu)
+        setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.refresh_action -> {
+                    // TODO To be implemented
+                    true
+                }
+
+                R.id.official_website_action -> {
+                    // TODO To be implemented
+                    true
+                }
+
+                R.id.settings_action -> {
+                    // TODO To be implemented
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
+    private fun configureBookmarksTopAppBarMenu() = with(binding.topAppBar) {
+        menu.clear()
+        inflateMenu(R.menu.bookmarks_top_app_bar_menu)
+        configureBookmarksSearchAction()
+        setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.settings_action -> {
+                    // TODO To be implemented
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
+    private fun configureBookmarksSearchAction() = with(binding.topAppBar.menu) {
+        val searchActionView = findItem(R.id.search_action).actionView as SearchView
+        searchActionView.queryHint = getString(R.string.action_title_search_bookmarks)
+        searchActionView.setOnQueryTextChangedListener {
+            // TODO To be implemented
+        }
     }
 }

@@ -5,6 +5,7 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 
 fun View.show() {
@@ -32,4 +33,15 @@ fun TextView.setClickableSpan(
 
     this.text = spannable
     movementMethod = LinkMovementMethod.getInstance()
+}
+
+inline fun SearchView.setOnQueryTextChangedListener(crossinline onTextChanged: (String) -> Unit) {
+    setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        override fun onQueryTextSubmit(query: String?) = false
+
+        override fun onQueryTextChange(newText: String?): Boolean {
+            onTextChanged(newText.orEmpty())
+            return true
+        }
+    })
 }
