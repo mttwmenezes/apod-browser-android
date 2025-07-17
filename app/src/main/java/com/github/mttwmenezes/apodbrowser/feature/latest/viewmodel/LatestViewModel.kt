@@ -41,4 +41,6 @@ class LatestViewModel @Inject constructor(
     private val failureUiState get() = LatestUiState(isFailure = true)
 
     private fun successUiState(apods: List<Apod>) = LatestUiState(isSuccess = true, apods = apods)
+
+    fun findApodBy(id: String) = uiState.value.apods.find { it.date == id }
 }

@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.github.mttwmenezes.apodbrowser.data.model.Apod
 import com.github.mttwmenezes.apodbrowser.databinding.FragmentLatestBinding
+import com.github.mttwmenezes.apodbrowser.feature.detail.view.DetailActivity
 import com.github.mttwmenezes.apodbrowser.feature.latest.view.feed.LatestFeedAdapter
 import com.github.mttwmenezes.apodbrowser.feature.latest.view.feed.LatestFeedBuilder
 import com.github.mttwmenezes.apodbrowser.feature.latest.view.feed.LatestFeedSpacingDecoration
@@ -96,7 +97,7 @@ class LatestFragment : Fragment(), LatestFeedAdapter.Listener {
     }
 
     override fun onFeedItemClicked(id: String) {
-        // TODO To be implemented
+        viewModel.findApodBy(id)?.let { DetailActivity.start(requireContext(), it) }
     }
 
     override fun onFeedItemOptionsClicked(id: String) {
