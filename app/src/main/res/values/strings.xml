@@ -9,6 +9,7 @@
     <!-- Content description -->
     <string name="apod_image_description">Apod\'s image</string>
     <string name="navigate_up_description">Navigate up</string>
+    <string name="close_button_description">Close</string>
 
     <!-- Latest -->
     <string name="content_description_item_options">Item options</string>
@@ -25,6 +26,9 @@
     <string name="image_copyright_action_title">Image credits</string>
     <string name="add_to_bookmarks_description">Add to bookmarks</string>
     <string name="remove_from_bookmarks_description">Remove from bookmarks</string>
+    <string name="image_copyright_sheet_title">Image Credit &amp; Copyright</string>
+    <string name="image_copyright_hint_text">For copyright details (when available), visit this APOD page.</string>
+    <string name="mage_copyright_hint_clickable_text">APOD page</string>
 
     <!-- Common: Action title -->
     <string name="open_image_action_title">Open image</string>
@@ -51,4 +55,5 @@
     <string name="example_apod_media_type">Image</string>
     <string name="example_apod_date">December 15, 2005</string>
     <string name="example_apod_explanation">Near its northernmost declination, tonight\'s Full Moon will be a special one, arcing high in northern hemisphere skies. But a Full Moon won\'t occur on this calendar date for another 19 years, a period known as the lunar Metonic cycle. September 15th\'s lunar phase and date were notable too, marking the return of a gibbous Moon rising over the High Sierra mountains. That scene was captured in Ansel Adams\' famous photograph Autumn Moon from Glacier Point, Yosemite National Park. Earlier this year, Texas State University physicists Donald Olson, Russell Doescher and students were able to pinpoint the location and (formerly uncertain) date the original Ansel Adams photo was taken - September 15, 1948. Accordingly, their astronomical detective work predicted that the lunar alignment and waxing gibbous phase would be repeated on Thursday, September 15, 2005, exactly three 19-year Metonic cycles later. On that day, about 300 photographers gathered at Glacier Point to record Ansel Adams\' Autumn Moon encore.</string>
+    <string name="example_apod_copyright">Russell Doescher (Texas State University)</string>
 </resources>

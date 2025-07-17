@@ -11,4 +11,7 @@
 
     <!-- Iconography -->
     <dimen name="large_icon">48dp</dimen>
+
+    <!-- Custom -->
+    <dimen name="sheet_title_top_margin">20dp</dimen>
 </resources>
