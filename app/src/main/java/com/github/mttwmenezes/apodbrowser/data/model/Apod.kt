@@ -1,12 +1,15 @@
 package com.github.mttwmenezes.apodbrowser.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.newLineTrimmed
 import com.github.mttwmenezes.apodbrowser.infrastructure.network.response.ApodResponse
 import java.io.Serializable
 
+@Entity
 data class Apod(
     val title: String,
-    val date: String,
+    @PrimaryKey val date: String,
     val url: String,
     val hdUrl: String?,
     val mediaType: String,
