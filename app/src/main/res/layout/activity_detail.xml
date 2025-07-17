@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,20 +14,21 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingtoolbar.FloatingToolbarLayout
-        android:id="@+id/floating_toolbar"
-        style="?attr/floatingToolbarVibrantStyle"
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:menu="@menu/detail_bottom_bar_menu"
+        app:navigationContentDescription="@string/navigate_up_description"
+        app:navigationIcon="@drawable/ic_arrow_back" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/bookmark_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:layout_marginHorizontal="@dimen/margin_regular"
-        android:layout_marginBottom="@dimen/margin_regular"
-        android:accessibilityTraversalAfter="@id/detail_content">
-
-        <include
-            android:id="@+id/floating_toolbar_content"
-            layout="@layout/layout_detail_floating_toolbar_content" />
-
-    </com.google.android.material.floatingtoolbar.FloatingToolbarLayout>
+        android:contentDescription="@string/add_to_bookmarks_description"
+        android:src="@drawable/ic_bookmark_border"
+        app:layout_anchor="@id/bottom_bar" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

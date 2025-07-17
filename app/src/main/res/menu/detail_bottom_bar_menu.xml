@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/play_video_action"
+        android:icon="@drawable/ic_play_circle"
+        android:title="@string/play_video_action_title"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/open_image_action"
+        android:icon="@drawable/ic_image"
+        android:title="@string/open_image_action_title"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/open_in_browser_action"
+        android:icon="@drawable/ic_open_in_browser"
+        android:title="@string/open_in_browser_action_title"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/image_copyright_action"
+        android:icon="@drawable/ic_info"
+        android:title="@string/image_copyright_action_title"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/share_action"
+        android:icon="@drawable/ic_share"
+        android:title="@string/share_action_title"
+        app:showAsAction="ifRoom" />
+</menu>

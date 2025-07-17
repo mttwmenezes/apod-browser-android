@@ -7,9 +7,13 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.updatePadding
 import coil3.load
+import com.github.mttwmenezes.apodbrowser.R
 import com.github.mttwmenezes.apodbrowser.data.model.Apod
 import com.github.mttwmenezes.apodbrowser.databinding.ActivityDetailBinding
+import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
+import com.github.mttwmenezes.apodbrowser.feature.other.ui.SystemUI
 import com.github.mttwmenezes.apodbrowser.infrastructure.date.Date
 import com.github.mttwmenezes.apodbrowser.infrastructure.date.format.DateFormatter
 import dagger.hilt.android.AndroidEntryPoint
@@ -21,6 +25,7 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailBinding
 
     @Inject lateinit var dateFormatter: DateFormatter
+    @Inject lateinit var systemUI: SystemUI
 
     private lateinit var apod: Apod
 
@@ -31,6 +36,7 @@ class DetailActivity : AppCompatActivity() {
         apod = intent.extras?.getSerializable(ARG_APOD, Apod::class.java) as Apod
         setContentView(binding.root)
         configureContent()
+        adjustContentPadding()
     }
 
     private val darkSystemBarStyle
@@ -43,10 +49,68 @@ class DetailActivity : AppCompatActivity() {
         titleLabel.text = apod.title
         dateLabel.text = dateFormatter.format(Date.parse(apod.date), DateFormatter.Style.Full)
         explanationLabel.text = apod.explanation
+        configureBottomBar()
     }
 
     private val apodImageUrl
         get() = if (apod.isImage) apod.url else apod.thumbnailUrl
+
+    private fun configureBottomBar() = with(binding.bottomBar) {
+        setNavigationOnClickListener { finish() }
+        configureVisibleBottomBarActions()
+        setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.play_video_action -> {
+                    // TODO To be implemented
+                    true
+                }
+
+                R.id.open_image_action -> {
+                    // TODO To be implemented
+                    true
+                }
+
+                R.id.open_in_browser_action -> {
+                    // TODO To be implemented
+                    true
+                }
+
+                R.id.image_copyright_action -> {
+                    // TODO To be implemented
+                    true
+                }
+
+                R.id.share_action -> {
+                    // TODO To be implemented
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
+    private fun configureVisibleBottomBarActions() = with(binding.bottomBar.menu) {
+        if (apod.copyright.isNullOrBlank()) findItem(R.id.image_copyright_action).hide()
+        when {
+            apod.isImage -> findItem(R.id.play_video_action).hide()
+            apod.isVideo -> findItem(R.id.open_image_action).hide()
+            else -> configureActionsForOtherApod()
+        }
+    }
+
+    private fun configureActionsForOtherApod() = with(binding.bottomBar.menu) {
+        findItem(R.id.play_video_action).hide()
+        findItem(R.id.open_image_action).hide()
+    }
+
+    private fun adjustContentPadding() = with(binding) {
+        bottomBar.post {
+            detailContent.root.updatePadding(
+                bottom = systemUI.navigationBarHeight + bottomBar.height
+            )
+        }
+    }
 
     companion object {
         private const val ARG_APOD = "apod"

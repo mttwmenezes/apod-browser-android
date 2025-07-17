@@ -3,6 +3,7 @@ package com.github.mttwmenezes.apodbrowser.feature.other.extension
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
@@ -13,6 +14,10 @@ fun View.show() {
 }
 
 fun View.hide() {
+    isVisible = false
+}
+
+fun MenuItem.hide() {
     isVisible = false
 }
 

@@ -15,6 +15,7 @@ data class Apod(
     val copyright: String?
 ) : Serializable {
     val isImage get() = mediaType == "image"
+    val isVideo get() = mediaType == "video"
 }
 
 fun ApodResponse.toApod() = Apod(

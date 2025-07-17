@@ -23,8 +23,8 @@
     <!-- Bookmarks -->
     <string name="action_title_search_bookmarks">Search bookmarks</string>
     <string name="image_copyright_action_title">Image credits</string>
-    <string name="add_to_bookmarks_action_title">Add to bookmarks</string>
-    <string name="remove_from_bookmarks_action_title">Remove from bookmarks</string>
+    <string name="add_to_bookmarks_description">Add to bookmarks</string>
+    <string name="remove_from_bookmarks_description">Remove from bookmarks</string>
 
     <!-- Common: Action title -->
     <string name="open_image_action_title">Open image</string>
