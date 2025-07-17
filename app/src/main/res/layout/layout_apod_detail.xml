@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:background="?attr/colorSurfaceContainerHighest"
+        android:contentDescription="@string/apod_image_description"
+        tools:src="@drawable/bm_example_apod" />
+
+    <TextView
+        android:id="@+id/title_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_regular"
+        android:layout_marginTop="@dimen/margin_regular"
+        android:textAppearance="?attr/textAppearanceHeadlineSmall"
+        tools:text="@string/example_apod_title" />
+
+    <TextView
+        android:id="@+id/date_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_regular"
+        android:layout_marginTop="@dimen/margin_extra_small"
+        android:textAppearance="?attr/textAppearanceBodySmall"
+        tools:text="@string/example_apod_date" />
+
+    <TextView
+        android:id="@+id/explanation_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_regular"
+        android:layout_marginTop="@dimen/margin_regular"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
+        tools:text="@string/example_apod_explanation" />
+
+</LinearLayout>

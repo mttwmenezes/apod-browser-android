@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/detail_content"
+            layout="@layout/layout_apod_detail" />
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.floatingtoolbar.FloatingToolbarLayout
+        android:id="@+id/floating_toolbar"
+        style="?attr/floatingToolbarVibrantStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
+        android:layout_marginHorizontal="@dimen/margin_regular"
+        android:layout_marginBottom="@dimen/margin_regular"
+        android:accessibilityTraversalAfter="@id/detail_content">
+
+        <include
+            android:id="@+id/floating_toolbar_content"
+            layout="@layout/layout_detail_floating_toolbar_content" />
+
+    </com.google.android.material.floatingtoolbar.FloatingToolbarLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
