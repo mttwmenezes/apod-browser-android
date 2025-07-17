@@ -43,6 +43,9 @@
     <string name="date_one_day_ago">1 day ago</string>
     <string name="date_days_ago_format">%d days ago</string>
 
+    <!-- URL -->
+    <string name="apod_url_format">https://apod.nasa.gov/apod/ap%s.html</string>
+
     <!-- Example -->
     <string name="example_apod_title">Autumn Moon Encore</string>
     <string name="example_apod_media_type">Image</string>

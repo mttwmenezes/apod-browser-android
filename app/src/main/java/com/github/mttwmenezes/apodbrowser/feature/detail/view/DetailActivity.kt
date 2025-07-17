@@ -72,7 +72,7 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 R.id.open_in_browser_action -> {
-                    // TODO To be implemented
+                    openWebPage(getString(R.string.apod_url_format, apod.condensedDate))
                     true
                 }
 

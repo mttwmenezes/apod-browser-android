@@ -16,6 +16,14 @@ data class Apod(
 ) : Serializable {
     val isImage get() = mediaType == "image"
     val isVideo get() = mediaType == "video"
+
+    val condensedDate
+        get() = buildString {
+            val (year, month, day) = date.split("-")
+            append(year.takeLast(2))
+            append(month)
+            append(day)
+        }
 }
 
 fun ApodResponse.toApod() = Apod(
