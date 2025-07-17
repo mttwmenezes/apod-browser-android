@@ -22,6 +22,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".feature.detail.view.DetailActivity"
+            android:exported="false"
+            android:parentActivityName=".feature.home.view.HomeActivity" />
+
     </application>
 
 </manifest>
