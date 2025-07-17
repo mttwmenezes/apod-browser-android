@@ -13,6 +13,7 @@ import com.github.mttwmenezes.apodbrowser.R
 import com.github.mttwmenezes.apodbrowser.data.model.Apod
 import com.github.mttwmenezes.apodbrowser.databinding.ActivityDetailBinding
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
+import com.github.mttwmenezes.apodbrowser.feature.other.extension.openWebPage
 import com.github.mttwmenezes.apodbrowser.feature.other.ui.SystemUI
 import com.github.mttwmenezes.apodbrowser.infrastructure.date.Date
 import com.github.mttwmenezes.apodbrowser.infrastructure.date.format.DateFormatter
@@ -61,7 +62,7 @@ class DetailActivity : AppCompatActivity() {
         setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.play_video_action -> {
-                    // TODO To be implemented
+                    openWebPage(apod.url)
                     true
                 }
 

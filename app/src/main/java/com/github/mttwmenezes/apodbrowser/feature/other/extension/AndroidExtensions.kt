@@ -1,5 +1,7 @@
 package com.github.mttwmenezes.apodbrowser.feature.other.extension
 
+import android.content.Context
+import android.content.Intent
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
@@ -8,6 +10,7 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.core.net.toUri
 
 fun View.show() {
     isVisible = true
@@ -49,4 +52,8 @@ inline fun SearchView.setOnQueryTextChangedListener(crossinline onTextChanged: (
             return true
         }
     })
+}
+
+fun Context.openWebPage(url: String) {
+    startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
 }
