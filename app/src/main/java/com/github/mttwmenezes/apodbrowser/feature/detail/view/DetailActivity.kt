@@ -7,6 +7,7 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.get
 import androidx.core.view.updatePadding
 import coil3.load
 import com.github.mttwmenezes.apodbrowser.R
@@ -14,6 +15,7 @@ import com.github.mttwmenezes.apodbrowser.data.model.Apod
 import com.github.mttwmenezes.apodbrowser.databinding.ActivityDetailBinding
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.openWebPage
+import com.github.mttwmenezes.apodbrowser.feature.other.extension.shareUrl
 import com.github.mttwmenezes.apodbrowser.feature.other.ui.SystemUI
 import com.github.mttwmenezes.apodbrowser.infrastructure.date.Date
 import com.github.mttwmenezes.apodbrowser.infrastructure.date.format.DateFormatter
@@ -82,7 +84,7 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 R.id.share_action -> {
-                    // TODO To be implemented
+                    shareUrl(getString(R.string.apod_url_format, apod.condensedDate))
                     true
                 }
 

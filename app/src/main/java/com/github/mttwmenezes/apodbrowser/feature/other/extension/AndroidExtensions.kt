@@ -57,3 +57,12 @@ inline fun SearchView.setOnQueryTextChangedListener(crossinline onTextChanged: (
 fun Context.openWebPage(url: String) {
     startActivity(Intent(Intent.ACTION_VIEW, url.toUri()))
 }
+
+fun Context.shareUrl(url: String, chooserTitle: String? = null) {
+    val intent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_TEXT, url)
+    }
+
+    startActivity(Intent.createChooser(intent, chooserTitle))
+}
