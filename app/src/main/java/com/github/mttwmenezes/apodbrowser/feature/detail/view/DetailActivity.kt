@@ -5,14 +5,20 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.updatePadding
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import coil3.load
 import com.github.mttwmenezes.apodbrowser.R
 import com.github.mttwmenezes.apodbrowser.data.model.Apod
 import com.github.mttwmenezes.apodbrowser.databinding.ActivityDetailBinding
+import com.github.mttwmenezes.apodbrowser.feature.detail.model.DetailBookmarkMessage
 import com.github.mttwmenezes.apodbrowser.feature.detail.view.sheet.ImageCopyrightSheet
+import com.github.mttwmenezes.apodbrowser.feature.detail.viewmodel.DetailViewModel
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.openWebPage
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.shareUrl
@@ -20,6 +26,7 @@ import com.github.mttwmenezes.apodbrowser.feature.other.ui.SystemUI
 import com.github.mttwmenezes.apodbrowser.infrastructure.date.Date
 import com.github.mttwmenezes.apodbrowser.infrastructure.date.format.DateFormatter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -27,7 +34,10 @@ class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
 
+    private val viewModel: DetailViewModel by viewModels()
+
     @Inject lateinit var dateFormatter: DateFormatter
+    @Inject lateinit var messages: DetailMessage
     @Inject lateinit var systemUI: SystemUI
 
     private lateinit var apod: Apod
@@ -40,6 +50,8 @@ class DetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         configureContent()
         adjustContentPadding()
+        observeUiState()
+        viewModel.determineBookmarkState(apod)
     }
 
     private val darkSystemBarStyle
@@ -113,6 +125,40 @@ class DetailActivity : AppCompatActivity() {
                 bottom = systemUI.navigationBarHeight + bottomBar.height
             )
         }
+    }
+
+    private fun observeUiState() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { uiState ->
+                    handleBookmarkStateChanged(uiState.isBookmarked)
+                    uiState.bookmarkMessage?.let { showBookmarkMessage(it) }
+                }
+            }
+        }
+    }
+
+    private fun handleBookmarkStateChanged(isBookmarked: Boolean) = with(binding.bookmarkFab) {
+        if (isBookmarked) {
+            setImageDrawable(bookmarkFilledDrawable)
+            contentDescription = getString(R.string.remove_from_bookmarks_description)
+            setOnClickListener { viewModel.removeFromBookmarks(apod) }
+        } else {
+            setImageDrawable(bookmarkBorderDrawable)
+            contentDescription = getString(R.string.add_to_bookmarks_description)
+            setOnClickListener { viewModel.addToBookmarks(apod) }
+        }
+    }
+
+    private val bookmarkFilledDrawable
+        get() = ResourcesCompat.getDrawable(resources, R.drawable.ic_bookmark_filled, null)
+
+    private val bookmarkBorderDrawable
+        get() = ResourcesCompat.getDrawable(resources, R.drawable.ic_bookmark_border, null)
+
+    private fun showBookmarkMessage(message: DetailBookmarkMessage) = with(binding) {
+        messages.show(message.resId, root, anchor = bottomBar)
+        viewModel.messageShown()
     }
 
     companion object {
