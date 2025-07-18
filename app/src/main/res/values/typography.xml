@@ -27,6 +27,12 @@
         <item name="fontFamily">@font/inter_tight_medium</item>
     </style>
 
+    <!-- Bookmarks -->
+    <style name="TextAppearance.TitleMedium.MediumWeight" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:fontFamily">@font/inter_tight_medium</item>
+        <item name="fontFamily">@font/inter_tight_medium</item>
+    </style>
+
     <!-- Common -->
     <style name="TextAppearance.HeadlineSmall.Sheet.Title" parent="TextAppearance.Material3.HeadlineSmall">
         <item name="android:fontFamily">@font/inter_tight_medium</item>

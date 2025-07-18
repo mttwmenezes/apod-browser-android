@@ -6,7 +6,9 @@
     <dimen name="margin_regular">16dp</dimen>
 
     <!-- Padding -->
+    <dimen name="padding_extra_small">4dp</dimen>
     <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_regular">16dp</dimen>
     <dimen name="padding_extra_large">48dp</dimen>
 
     <!-- Iconography -->
@@ -14,4 +16,7 @@
 
     <!-- Custom -->
     <dimen name="sheet_title_top_margin">20dp</dimen>
+
+    <!-- Bookmarks -->
+    <dimen name="bookmark_feed_item_ref_width">248dp</dimen>
 </resources>
