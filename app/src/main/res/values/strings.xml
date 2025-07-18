@@ -23,12 +23,19 @@
 
     <!-- Bookmarks -->
     <string name="action_title_search_bookmarks">Search bookmarks</string>
+
+    <!-- Detail -->
     <string name="image_copyright_action_title">Image credits</string>
     <string name="add_to_bookmarks_description">Add to bookmarks</string>
     <string name="remove_from_bookmarks_description">Remove from bookmarks</string>
     <string name="image_copyright_sheet_title">Image Credit &amp; Copyright</string>
     <string name="image_copyright_hint_text">For copyright details (when available), visit this APOD page.</string>
     <string name="mage_copyright_hint_clickable_text">APOD page</string>
+    <string name="message_bookmark_added">Bookmarked</string>
+    <string name="message_bookmark_removed">Removed from bookmarks</string>
+
+    <!-- Common: Message -->
+    <string name="message_unexpected_error_occurred">Unexpected error occurred</string>
 
     <!-- Common: Action title -->
     <string name="open_image_action_title">Open image</string>
