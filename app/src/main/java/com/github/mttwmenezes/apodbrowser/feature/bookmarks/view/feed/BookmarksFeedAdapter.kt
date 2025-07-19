@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.github.mttwmenezes.apodbrowser.databinding.FeedItemBookmarkBinding
 import com.github.mttwmenezes.apodbrowser.feature.bookmarks.model.BookmarksFeedItem
 
@@ -12,24 +13,19 @@ class BookmarksFeedAdapter(
     private val listener: Listener
 ) : ListAdapter<BookmarksFeedItem, BookmarksFeedViewHolder>(BookmarksFeedDiffUtilItemCallback()) {
 
-    private var displayWidth = 0
-
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): BookmarksFeedViewHolder.Apod {
-        displayWidth = parent.context.resources.displayMetrics.widthPixels
-        return BookmarksFeedViewHolder.Apod(
-            FeedItemBookmarkBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookmarksFeedViewHolder {
+        val binding = FeedItemBookmarkBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
+        binding.root.updateLayoutParams<RecyclerView.LayoutParams> {
+            width = parent.context.resources.displayMetrics.widthPixels / COMPACT_SPAN_COUNT
+        }
+        return BookmarksFeedViewHolder.Apod(binding)
     }
 
     override fun onBindViewHolder(holder: BookmarksFeedViewHolder, position: Int) {
-        holder.itemView.updateLayoutParams { width = displayWidth / COMPACT_SPAN_COUNT }
         if (holder is BookmarksFeedViewHolder.Apod) {
             holder.bind(
                 item = getItem(position) as BookmarksFeedItem.Apod,
