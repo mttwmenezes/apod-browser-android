@@ -1,41 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="?attr/materialCardViewFilledStyle"
     android:layout_width="@dimen/bookmark_feed_item_ref_width"
     android:layout_height="wrap_content"
-    app:shapeAppearance="?attr/shapeAppearanceCornerLargeIncreased"
-    tools:layout_margin="@dimen/margin_regular">
+    tools:layout_margin="@dimen/margin_small">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="?attr/colorSurfaceContainerHighest"
+        android:contentDescription="@string/apod_image_description"
+        app:layout_constraintDimensionRatio="16:9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearance="?attr/shapeAppearanceCornerLargeIncreased"
+        tools:scaleType="centerCrop"
+        tools:src="@drawable/bm_example_apod" />
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/apod_image_description"
-            android:scaleType="centerCrop"
-            tools:src="@drawable/bm_example_apod" />
+    <TextView
+        android:id="@+id/title_label"
+        style="@style/TextAppearance.BodySmall.MediumWeight"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_extra_small"
+        android:layout_marginTop="@dimen/margin_extra_small"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@id/image"
+        app:layout_constraintStart_toStartOf="@id/image"
+        app:layout_constraintTop_toBottomOf="@id/image"
+        tools:text="@string/example_apod_title" />
 
-        <TextView
-            android:id="@+id/title_label"
-            style="@style/TextAppearance.TitleMedium.MediumWeight"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginHorizontal="@dimen/margin_small"
-            android:layout_marginVertical="@dimen/margin_regular"
-            android:background="@drawable/bookmark_feed_item_title_background"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:paddingHorizontal="@dimen/padding_regular"
-            android:paddingVertical="@dimen/padding_extra_small"
-            tools:text="@string/example_apod_title" />
+    <TextView
+        android:id="@+id/media_type_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="?attr/textAppearanceBodySmall"
+        app:layout_constraintEnd_toEndOf="@id/title_label"
+        app:layout_constraintStart_toStartOf="@id/title_label"
+        app:layout_constraintTop_toBottomOf="@id/title_label"
+        tools:text="Image" />
 
-    </FrameLayout>
-
-</com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

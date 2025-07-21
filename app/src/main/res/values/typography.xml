@@ -28,7 +28,7 @@
     </style>
 
     <!-- Bookmarks -->
-    <style name="TextAppearance.TitleMedium.MediumWeight" parent="TextAppearance.Material3.TitleMedium">
+    <style name="TextAppearance.BodySmall.MediumWeight" parent="TextAppearance.Material3.BodySmall">
         <item name="android:fontFamily">@font/inter_tight_medium</item>
         <item name="fontFamily">@font/inter_tight_medium</item>
     </style>
