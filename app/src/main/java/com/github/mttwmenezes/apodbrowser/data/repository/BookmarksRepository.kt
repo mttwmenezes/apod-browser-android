@@ -13,4 +13,6 @@ class BookmarksRepository @Inject constructor(private val dao: BookmarksDao) {
     suspend fun remove(apod: Apod) = dao.delete(apod)
 
     suspend fun isBookmarked(apod: Apod) = dao.findByDate(apod.date) != null
+
+    fun fetchAll() = dao.fetchAll()
 }
