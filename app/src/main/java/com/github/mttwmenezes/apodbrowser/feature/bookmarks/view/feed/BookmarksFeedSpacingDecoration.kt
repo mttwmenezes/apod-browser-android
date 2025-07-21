@@ -22,11 +22,11 @@ class BookmarksFeedSpacingDecoration @Inject constructor(
         val spanIndex = layoutParams.spanIndex
 
         if (spanIndex == 0) {
-            outRect.left = marginSmall
-            outRect.right = marginSmall / 2
+            outRect.left = marginExtraSmall
+            outRect.right = marginExtraSmall / 2
         } else {
-            outRect.left = marginSmall / 2
-            outRect.right = marginSmall
+            outRect.left = marginExtraSmall / 2
+            outRect.right = marginExtraSmall
         }
 
         outRect.top = if (position == 0 || position == 1) marginSmall else 0
@@ -36,6 +36,9 @@ class BookmarksFeedSpacingDecoration @Inject constructor(
             marginSmall
         }
     }
+
+    private val marginExtraSmall
+        get() = context.resources.getDimensionPixelSize(R.dimen.margin_extra_small)
 
     private val marginSmall
         get() = context.resources.getDimensionPixelSize(R.dimen.margin_small)
