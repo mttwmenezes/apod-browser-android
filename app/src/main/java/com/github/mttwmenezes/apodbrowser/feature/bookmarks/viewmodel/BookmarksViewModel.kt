@@ -40,4 +40,6 @@ class BookmarksViewModel @Inject constructor(
         BookmarksUiState(isSuccess = true, bookmarks = bookmarks.reversed())
 
     private val emptyState get() = BookmarksUiState(isEmpty = true)
+
+    fun findBookmarkBy(id: String) = uiState.value.bookmarks.find { it.date == id }
 }

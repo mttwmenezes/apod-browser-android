@@ -4,15 +4,41 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.github.mttwmenezes.apodbrowser.data.model.Apod
 import com.github.mttwmenezes.apodbrowser.databinding.FragmentBookmarksBinding
+import com.github.mttwmenezes.apodbrowser.feature.bookmarks.view.feed.BookmarksFeedAdapter
+import com.github.mttwmenezes.apodbrowser.feature.bookmarks.view.feed.BookmarksFeedBuilder
+import com.github.mttwmenezes.apodbrowser.feature.bookmarks.view.feed.BookmarksFeedSpacingDecoration
+import com.github.mttwmenezes.apodbrowser.feature.bookmarks.viewmodel.BookmarksViewModel
+import com.github.mttwmenezes.apodbrowser.feature.detail.view.DetailActivity
+import com.github.mttwmenezes.apodbrowser.feature.other.delegate.HomeLayoutDelegate
+import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
+import com.github.mttwmenezes.apodbrowser.feature.other.extension.show
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class BookmarksFragment : Fragment() {
+class BookmarksFragment : Fragment(), BookmarksFeedAdapter.Listener {
 
     private var _binding: FragmentBookmarksBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel: BookmarksViewModel by viewModels()
+
+    private lateinit var feedAdapter: BookmarksFeedAdapter
+    @Inject lateinit var feedBuilder: BookmarksFeedBuilder
+    @Inject lateinit var feedSpacingDecoration: BookmarksFeedSpacingDecoration
+
+    @Inject lateinit var messages: BookmarkMessages
+    @Inject lateinit var homeLayoutDelegate: HomeLayoutDelegate
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,8 +49,72 @@ class BookmarksFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        configureUi()
+        observeUiState()
+    }
+
+    private fun configureUi() {
+        feedAdapter = BookmarksFeedAdapter(listener = this)
+        binding.feedRecyclerView.apply {
+            adapter = feedAdapter
+            setHasFixedSize(false)
+            addItemDecoration(feedSpacingDecoration)
+            layoutManager = StaggeredGridLayoutManager(
+                COMPACT_VERTICAL_SPAN_COUNT,
+                StaggeredGridLayoutManager.VERTICAL
+            ).apply {
+                gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS
+            }
+        }
+    }
+
+    private fun observeUiState() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { uiState ->
+                    when {
+                        uiState.isEmpty -> onEmptyBookmarks()
+                        uiState.isFailure -> onFailure()
+                        uiState.isSuccess -> onSuccess(uiState.bookmarks)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun onEmptyBookmarks() = with(binding) {
+        feedRecyclerView.hide()
+        emptyPlaceholder.root.show()
+        emptyPlaceholder.content.y -= homeLayoutDelegate.navigationBar.height
+    }
+
+    private fun onFailure() = with(binding) {
+        feedRecyclerView.isVisible = !emptyPlaceholder.root.isVisible
+        emptyPlaceholder.root.isVisible = !feedRecyclerView.isVisible
+        messages.showUnexpectedErrorOccurredMessage(
+            root,
+            anchor = homeLayoutDelegate.navigationBar
+        )
+    }
+
+    private fun onSuccess(bookmarks: List<Apod>) = with(binding) {
+        feedRecyclerView.show()
+        emptyPlaceholder.root.hide()
+        feedAdapter.submitList(feedBuilder.build(bookmarks))
+    }
+
+    override fun onFeedItemClicked(id: String) {
+        viewModel.findBookmarkBy(id)?.let { DetailActivity.start(requireContext(), it) }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val COMPACT_VERTICAL_SPAN_COUNT = 2
     }
 }
