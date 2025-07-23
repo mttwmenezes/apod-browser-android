@@ -25,6 +25,7 @@ sealed class BookmarksFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(i
                 )
             }
             titleLabel.text = item.title
+            mediaTypeLabel.text = item.mediaType
             root.setOnClickListener { onItemClickListener(item.itemId) }
         }
 
@@ -38,6 +39,7 @@ sealed class BookmarksFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(i
         private fun onImageLoadSuccess() = with(binding.image) {
             updateLayoutParams<ConstraintLayout.LayoutParams> {
                 height = ConstraintLayout.LayoutParams.WRAP_CONTENT
+                adjustViewBounds = true
                 dimensionRatio = null
             }
         }
