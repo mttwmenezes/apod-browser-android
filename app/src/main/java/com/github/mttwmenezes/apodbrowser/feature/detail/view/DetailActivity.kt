@@ -7,6 +7,7 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.updatePadding
 import androidx.lifecycle.Lifecycle
@@ -23,6 +24,7 @@ import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.openWebPage
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.shareUrl
 import com.github.mttwmenezes.apodbrowser.feature.other.ui.SystemUI
+import com.github.mttwmenezes.apodbrowser.feature.other.view.StatusBarProtectionView
 import com.github.mttwmenezes.apodbrowser.infrastructure.date.Date
 import com.github.mttwmenezes.apodbrowser.infrastructure.date.format.DateFormatter
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,6 +53,7 @@ class DetailActivity : AppCompatActivity() {
         configureContent()
         adjustContentPadding()
         observeUiState()
+        applyStatusBarProtection()
         viewModel.determineBookmarkState(apod)
     }
 
@@ -159,6 +162,16 @@ class DetailActivity : AppCompatActivity() {
     private fun showBookmarkMessage(message: DetailBookmarkMessage) = with(binding) {
         messages.show(message.resId, root, anchor = bottomBar)
         viewModel.messageShown()
+    }
+
+    private fun applyStatusBarProtection() {
+        val protectionView = StatusBarProtectionView(context = this).apply {
+            layoutParams = CoordinatorLayout.LayoutParams(
+                CoordinatorLayout.LayoutParams.MATCH_PARENT,
+                systemUI.statusBarHeight
+            )
+        }
+        binding.root.addView(protectionView)
     }
 
     companion object {
