@@ -36,6 +36,10 @@ class ExploreSheet : BottomSheetDialogFragment() {
                 eventPublisher.publish(ExploreOptionClicked.RandomPick)
                 dismissNow()
             }
+            calendarButton.setOnClickListener {
+                eventPublisher.publish(ExploreOptionClicked.Calendar)
+                dismissNow()
+            }
         }
     }
 }

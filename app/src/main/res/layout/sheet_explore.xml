@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@id/divider">
 
         <Button
-            android:id="@+id/pick_from_date_option"
+            android:id="@+id/calendar_button"
             style="@style/Widget.Button.Sheet.Option.Emphasized"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

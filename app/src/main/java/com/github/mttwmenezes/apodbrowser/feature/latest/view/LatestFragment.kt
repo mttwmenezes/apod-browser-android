@@ -14,6 +14,7 @@ import com.github.mttwmenezes.apodbrowser.data.model.Apod
 import com.github.mttwmenezes.apodbrowser.databinding.FragmentLatestBinding
 import com.github.mttwmenezes.apodbrowser.feature.detail.view.DetailActivity
 import com.github.mttwmenezes.apodbrowser.feature.explore.view.ExploreSheet
+import com.github.mttwmenezes.apodbrowser.feature.latest.view.dialog.DatePickerDialog
 import com.github.mttwmenezes.apodbrowser.feature.latest.view.feed.LatestFeedAdapter
 import com.github.mttwmenezes.apodbrowser.feature.latest.view.feed.LatestFeedBuilder
 import com.github.mttwmenezes.apodbrowser.feature.latest.view.feed.LatestFeedSpacingDecoration
@@ -132,6 +133,7 @@ class LatestFragment : Fragment(), LatestFeedAdapter.Listener, EventObserver {
     private fun handleExploreOptionClicked(event: ExploreOptionClicked) {
         when (event) {
             ExploreOptionClicked.RandomPick -> fetchRandomApod()
+            ExploreOptionClicked.Calendar -> showDatePickerDialog()
         }
     }
 
@@ -152,6 +154,10 @@ class LatestFragment : Fragment(), LatestFeedAdapter.Listener, EventObserver {
             binding.root,
             anchor = homeLayoutDelegate.navigationBar
         )
+    }
+
+    private fun showDatePickerDialog() {
+        DatePickerDialog().show(childFragmentManager, null)
     }
 
     override fun onStart() {
