@@ -18,7 +18,9 @@ import com.github.mttwmenezes.apodbrowser.feature.latest.view.feed.LatestFeedAda
 import com.github.mttwmenezes.apodbrowser.feature.latest.view.feed.LatestFeedBuilder
 import com.github.mttwmenezes.apodbrowser.feature.latest.view.feed.LatestFeedSpacingDecoration
 import com.github.mttwmenezes.apodbrowser.feature.latest.viewmodel.LatestViewModel
+import com.github.mttwmenezes.apodbrowser.feature.other.delegate.HomeLayoutDelegate
 import com.github.mttwmenezes.apodbrowser.feature.other.event.ExploreActionClickEvent
+import com.github.mttwmenezes.apodbrowser.feature.other.event.ExploreOptionClicked
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.show
 import com.github.mttwmenezes.apodbrowser.infrastructure.event.EventObserver
@@ -40,6 +42,8 @@ class LatestFragment : Fragment(), LatestFeedAdapter.Listener, EventObserver {
     @Inject lateinit var feedSpacingDecoration: LatestFeedSpacingDecoration
 
     @Inject lateinit var eventSubscriber: EventSubscriber
+    @Inject lateinit var messages: LatestMessages
+    @Inject lateinit var homeLayoutDelegate: HomeLayoutDelegate
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -117,11 +121,37 @@ class LatestFragment : Fragment(), LatestFeedAdapter.Listener, EventObserver {
     override fun onEvent(event: Any) {
         when (event) {
             is ExploreActionClickEvent -> showExploreSheet()
+            is ExploreOptionClicked -> handleExploreOptionClicked(event)
         }
     }
 
     private fun showExploreSheet() {
         ExploreSheet().show(childFragmentManager, null)
+    }
+
+    private fun handleExploreOptionClicked(event: ExploreOptionClicked) {
+        when (event) {
+            ExploreOptionClicked.RandomPick -> fetchRandomApod()
+        }
+    }
+
+    private fun fetchRandomApod() = with(binding) {
+        feedSwipeRefresh.isRefreshing = true
+        viewModel.fetchRandom { apod ->
+            feedSwipeRefresh.isRefreshing = false
+            apod?.let {
+                DetailActivity.start(requireContext(), it)
+            } ?: run {
+                showUnexpectedErrorMessage()
+            }
+        }
+    }
+
+    private fun showUnexpectedErrorMessage() {
+        messages.showUnexpectedErrorMessage(
+            binding.root,
+            anchor = homeLayoutDelegate.navigationBar
+        )
     }
 
     override fun onStart() {

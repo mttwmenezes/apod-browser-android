@@ -60,7 +60,7 @@
             app:icon="@drawable/ic_calendar_month" />
 
         <Button
-            android:id="@+id/pick_random_option"
+            android:id="@+id/random_pick_button"
             style="@style/Widget.Button.Sheet.Option.Emphasized"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

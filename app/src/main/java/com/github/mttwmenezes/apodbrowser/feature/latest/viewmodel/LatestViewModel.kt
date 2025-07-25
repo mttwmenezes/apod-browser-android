@@ -21,6 +21,7 @@ class LatestViewModel @Inject constructor(
     val uiState get() = _uiState.asStateFlow()
 
     private var fetchLatestJob: Job? = null
+    private var fetchApodJob: Job? = null
 
     init {
         fetchLatest()
@@ -43,4 +44,9 @@ class LatestViewModel @Inject constructor(
     private fun successUiState(apods: List<Apod>) = LatestUiState(isSuccess = true, apods = apods)
 
     fun findApodBy(id: String) = uiState.value.apods.find { it.date == id }
+
+    fun fetchRandom(onComplete: (Apod?) -> Unit) {
+        fetchApodJob?.cancel()
+        fetchLatestJob = viewModelScope.launch { onComplete(repository.fetchRandom()) }
+    }
 }
