@@ -19,4 +19,6 @@ class ApodRepository @Inject constructor(
 
     private val pastWeek
         get() = dateFormatter.format(Date.now().minusWeeks(1L), DateFormatter.Style.Iso)
+
+    suspend fun fetchRandom() = withContext(dispatcher) { source.fetchRandom()?.toApod() }
 }

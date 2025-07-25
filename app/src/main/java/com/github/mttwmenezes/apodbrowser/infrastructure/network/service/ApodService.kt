@@ -14,4 +14,11 @@ interface ApodService {
         @Query("start_date") startDate: String,
         @Query("thumbs") includeThumbnail: Boolean = true
     ): Response<List<ApodResponse>>
+
+    @GET(BuildConfig.ENDPOINT)
+    suspend fun fetchRandom(
+        @Query("api_key") key: String = BuildConfig.PUBLIC_KEY,
+        @Query("count") count: Int = 1,
+        @Query("thumbs") includeThumbnail: Boolean = true
+    ): Response<List<ApodResponse>>
 }

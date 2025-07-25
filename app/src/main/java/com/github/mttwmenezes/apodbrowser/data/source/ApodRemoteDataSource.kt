@@ -17,4 +17,13 @@ class ApodRemoteDataSource @Inject constructor(
             onFailure = { emptyList() }
         )
     }
+
+    suspend fun fetchRandom() = withContext(dispatcher) {
+        runCatching {
+            service.fetchRandom()
+        }.fold(
+            onSuccess = { it.body()?.first() },
+            onFailure = { null }
+        )
+    }
 }
