@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/explore_action"
+        android:icon="@drawable/ic_explore"
+        android:title="@string/feature_title_explore"
+        app:showAsAction="ifRoom" />
+    <item
         android:id="@+id/refresh_action"
         android:title="@string/action_title_refresh"
         app:showAsAction="never" />

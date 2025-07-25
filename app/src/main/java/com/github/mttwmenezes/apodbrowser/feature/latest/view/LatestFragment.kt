@@ -13,18 +13,22 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.github.mttwmenezes.apodbrowser.data.model.Apod
 import com.github.mttwmenezes.apodbrowser.databinding.FragmentLatestBinding
 import com.github.mttwmenezes.apodbrowser.feature.detail.view.DetailActivity
+import com.github.mttwmenezes.apodbrowser.feature.explore.view.ExploreSheet
 import com.github.mttwmenezes.apodbrowser.feature.latest.view.feed.LatestFeedAdapter
 import com.github.mttwmenezes.apodbrowser.feature.latest.view.feed.LatestFeedBuilder
 import com.github.mttwmenezes.apodbrowser.feature.latest.view.feed.LatestFeedSpacingDecoration
 import com.github.mttwmenezes.apodbrowser.feature.latest.viewmodel.LatestViewModel
+import com.github.mttwmenezes.apodbrowser.feature.other.event.ExploreActionClickEvent
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.show
+import com.github.mttwmenezes.apodbrowser.infrastructure.event.EventObserver
+import com.github.mttwmenezes.apodbrowser.infrastructure.event.EventSubscriber
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LatestFragment : Fragment(), LatestFeedAdapter.Listener {
+class LatestFragment : Fragment(), LatestFeedAdapter.Listener, EventObserver {
 
     private var _binding: FragmentLatestBinding? = null
     private val binding get() = _binding!!
@@ -34,6 +38,8 @@ class LatestFragment : Fragment(), LatestFeedAdapter.Listener {
     private lateinit var feedAdapter: LatestFeedAdapter
     @Inject lateinit var feedBuilder: LatestFeedBuilder
     @Inject lateinit var feedSpacingDecoration: LatestFeedSpacingDecoration
+
+    @Inject lateinit var eventSubscriber: EventSubscriber
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -106,6 +112,26 @@ class LatestFragment : Fragment(), LatestFeedAdapter.Listener {
 
     override fun onFeedItemExploreHintClicked() {
         // TODO To be implemented
+    }
+
+    override fun onEvent(event: Any) {
+        when (event) {
+            is ExploreActionClickEvent -> showExploreSheet()
+        }
+    }
+
+    private fun showExploreSheet() {
+        ExploreSheet().show(childFragmentManager, null)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        eventSubscriber.subscribe(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        eventSubscriber.unsubscribe(this)
     }
 
     override fun onDestroyView() {
