@@ -15,4 +15,27 @@
         <item name="collapsedTitleTextAppearance">@style/TextAppearance.TitleLarge.MediumWeight</item>
         <item name="expandedTitleTextAppearance">@style/TextAppearance.HeadlineMedium.MediumWeight</item>
     </style>
+
+    <style name="Widget.Button.Sheet.Option" parent="Widget.AppCompat.TextView">
+        <item name="android:clickable">true</item>
+        <item name="android:drawablePadding">@dimen/padding_sheet_option_button_drawable</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">@dimen/padding_regular</item>
+        <item name="android:textAppearance">?attr/textAppearanceBodyLarge</item>
+    </style>
+
+    <style name="Widget.Button.Sheet.Option.Emphasized" parent="Widget.Material3.Button">
+        <item name="iconSize">@dimen/regular_icon</item>
+        <item name="android:textAppearance">?attr/textAppearanceBodyMedium</item>
+        <item name="iconGravity">top</item>
+        <item name="android:paddingVertical">@dimen/padding_regular</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.Button.Sheet.Option.Emphasized</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceCornerMedium</item>
+    </style>
+
+    <style name="ThemeOverlay.Button.Sheet.Option.Emphasized" parent="ThemeOverlay.Material3.Button">
+        <item name="colorContainer">?attr/colorSurfaceContainerHighest</item>
+        <item name="colorOnContainer">?attr/colorOnSurface</item>
+    </style>
 </resources>

@@ -12,10 +12,12 @@
     <dimen name="padding_extra_large">48dp</dimen>
 
     <!-- Iconography -->
+    <dimen name="regular_icon">24dp</dimen>
     <dimen name="large_icon">48dp</dimen>
 
     <!-- Custom -->
-    <dimen name="sheet_title_top_margin">20dp</dimen>
+    <dimen name="margin_sheet_title_top">20dp</dimen>
+    <dimen name="padding_sheet_option_button_drawable">20dp</dimen>
 
     <!-- Bookmarks -->
     <dimen name="bookmark_feed_item_ref_width">248dp</dimen>
