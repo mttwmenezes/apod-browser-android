@@ -16,6 +16,13 @@ interface ApodService {
     ): Response<List<ApodResponse>>
 
     @GET(BuildConfig.ENDPOINT)
+    suspend fun fetchFromDate(
+        @Query("api_key") key: String = BuildConfig.PUBLIC_KEY,
+        @Query("date") date: String,
+        @Query("thumbs") includeThumbnail: Boolean = true
+    ): Response<ApodResponse>
+
+    @GET(BuildConfig.ENDPOINT)
     suspend fun fetchRandom(
         @Query("api_key") key: String = BuildConfig.PUBLIC_KEY,
         @Query("count") count: Int = 1,

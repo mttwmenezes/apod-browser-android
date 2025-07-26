@@ -18,6 +18,15 @@ class ApodRemoteDataSource @Inject constructor(
         )
     }
 
+    suspend fun fetchFromDate(date: String) = withContext(dispatcher) {
+        runCatching {
+            service.fetchFromDate(date = date)
+        }.fold(
+            onSuccess = { it.body() },
+            onFailure = { null }
+        )
+    }
+
     suspend fun fetchRandom() = withContext(dispatcher) {
         runCatching {
             service.fetchRandom()

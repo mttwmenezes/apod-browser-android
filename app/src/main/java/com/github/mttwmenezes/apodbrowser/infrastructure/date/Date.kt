@@ -1,6 +1,9 @@
 package com.github.mttwmenezes.apodbrowser.infrastructure.date
 
+import java.time.Instant
 import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.time.temporal.ChronoUnit
 
 class Date private constructor(val wrapped: LocalDate) {
@@ -27,5 +30,12 @@ class Date private constructor(val wrapped: LocalDate) {
         fun now() = Date(LocalDate.now())
 
         fun parse(raw: String) = Date(LocalDate.parse(raw))
+
+        fun parse(dateInMillis: Long) = Date(
+            LocalDateTime.ofInstant(
+                Instant.ofEpochMilli(dateInMillis),
+                ZoneId.systemDefault()
+            ).toLocalDate()
+        )
     }
 }
