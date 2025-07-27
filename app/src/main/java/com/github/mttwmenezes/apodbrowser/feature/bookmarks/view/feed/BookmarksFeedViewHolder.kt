@@ -26,7 +26,7 @@ sealed class BookmarksFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(i
             }
             titleLabel.text = item.title
             mediaTypeLabel.text = item.mediaType
-            root.setOnClickListener { onItemClickListener(item.itemId) }
+            rippleOverlay.setOnClickListener { onItemClickListener(item.itemId) }
         }
 
         private fun onImageLoadStarted() = with(binding.image) {
