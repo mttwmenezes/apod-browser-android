@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.github.mttwmenezes.apodbrowser.R
 import com.github.mttwmenezes.apodbrowser.databinding.SheetExploreBinding
 import com.github.mttwmenezes.apodbrowser.feature.other.event.ExploreOptionClicked
+import com.github.mttwmenezes.apodbrowser.feature.other.extension.openWebPage
 import com.github.mttwmenezes.apodbrowser.infrastructure.event.EventPublisher
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,6 +41,9 @@ class ExploreSheet : BottomSheetDialogFragment() {
             calendarButton.setOnClickListener {
                 eventPublisher.publish(ExploreOptionClicked.Calendar)
                 dismissNow()
+            }
+            archiveLabel.setOnClickListener {
+                requireContext().openWebPage(getString(R.string.archive_url))
             }
         }
     }
