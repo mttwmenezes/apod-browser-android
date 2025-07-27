@@ -45,6 +45,11 @@ class LatestViewModel @Inject constructor(
 
     fun findApodBy(id: String) = uiState.value.apods.find { it.date == id }
 
+    fun fetchFromDate(dateInMillis: Long, onComplete: (Apod?) -> Unit) {
+        fetchApodJob?.cancel()
+        fetchApodJob = viewModelScope.launch { onComplete(repository.fetchFromDate(dateInMillis)) }
+    }
+
     fun fetchRandom(onComplete: (Apod?) -> Unit) {
         fetchApodJob?.cancel()
         fetchLatestJob = viewModelScope.launch { onComplete(repository.fetchRandom()) }

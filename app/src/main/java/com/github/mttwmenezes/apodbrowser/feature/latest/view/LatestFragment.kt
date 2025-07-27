@@ -20,6 +20,7 @@ import com.github.mttwmenezes.apodbrowser.feature.latest.view.feed.LatestFeedBui
 import com.github.mttwmenezes.apodbrowser.feature.latest.view.feed.LatestFeedSpacingDecoration
 import com.github.mttwmenezes.apodbrowser.feature.latest.viewmodel.LatestViewModel
 import com.github.mttwmenezes.apodbrowser.feature.other.delegate.HomeLayoutDelegate
+import com.github.mttwmenezes.apodbrowser.feature.other.event.DatePicked
 import com.github.mttwmenezes.apodbrowser.feature.other.event.ExploreActionClickEvent
 import com.github.mttwmenezes.apodbrowser.feature.other.event.ExploreOptionClicked
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
@@ -123,6 +124,7 @@ class LatestFragment : Fragment(), LatestFeedAdapter.Listener, EventObserver {
         when (event) {
             is ExploreActionClickEvent -> showExploreSheet()
             is ExploreOptionClicked -> handleExploreOptionClicked(event)
+            is DatePicked -> fetchApodFromDate(event.dateInMillis)
         }
     }
 
@@ -158,6 +160,18 @@ class LatestFragment : Fragment(), LatestFeedAdapter.Listener, EventObserver {
 
     private fun showDatePickerDialog() {
         DatePickerDialog().show(childFragmentManager, null)
+    }
+
+    private fun fetchApodFromDate(dateInMillis: Long) = with(binding) {
+        feedSwipeRefresh.isRefreshing = true
+        viewModel.fetchFromDate(dateInMillis) { apod ->
+            feedSwipeRefresh.isRefreshing = false
+            apod?.let {
+                DetailActivity.start(requireContext(), it)
+            } ?: run {
+                showUnexpectedErrorMessage()
+            }
+        }
     }
 
     override fun onStart() {
