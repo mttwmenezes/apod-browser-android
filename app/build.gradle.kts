@@ -73,6 +73,7 @@ dependencies {
     // Coil
     implementation(libs.coil)
     implementation(libs.coil.network)
+    implementation(libs.coil.gif)
 
     // Kotlin serialization
     implementation(libs.kotlin.serialization)
