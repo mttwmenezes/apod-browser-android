@@ -20,6 +20,7 @@ import com.github.mttwmenezes.apodbrowser.databinding.ActivityDetailBinding
 import com.github.mttwmenezes.apodbrowser.feature.detail.model.DetailBookmarkMessage
 import com.github.mttwmenezes.apodbrowser.feature.detail.view.sheet.ImageCopyrightSheet
 import com.github.mttwmenezes.apodbrowser.feature.detail.viewmodel.DetailViewModel
+import com.github.mttwmenezes.apodbrowser.feature.image.view.ImageDetailActivity
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.openWebPage
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.shareUrl
@@ -84,7 +85,7 @@ class DetailActivity : AppCompatActivity() {
                 }
 
                 R.id.open_image_action -> {
-                    // TODO To be implemented
+                    ImageDetailActivity.start(this@DetailActivity, apod)
                     true
                 }
 
