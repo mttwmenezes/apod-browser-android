@@ -2,4 +2,7 @@
 <resources>
     <!-- Custom -->
     <color name="surface_50">#801D1B20</color>
+
+    <!-- Image detail -->
+    <color name="image_detail_bar_background">#CCFEF7FF</color>
 </resources>

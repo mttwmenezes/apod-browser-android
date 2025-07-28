@@ -42,6 +42,9 @@
     <string name="message_bookmark_added">Bookmarked</string>
     <string name="message_bookmark_removed">Removed from bookmarks</string>
 
+    <!-- Image detail -->
+    <string name="download_image_action_title">Download image</string>
+
     <!-- Common: Message -->
     <string name="message_unexpected_error_occurred">Unexpected error occurred</string>
 
