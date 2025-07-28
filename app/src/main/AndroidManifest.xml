@@ -35,6 +35,10 @@
             android:exported="false"
             android:parentActivityName=".feature.home.view.HomeActivity" />
 
+        <activity
+            android:name=".feature.image.view.ImageDetailActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>
