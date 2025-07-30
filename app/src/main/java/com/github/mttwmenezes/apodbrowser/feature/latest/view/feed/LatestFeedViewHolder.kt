@@ -3,6 +3,7 @@ package com.github.mttwmenezes.apodbrowser.feature.latest.view.feed
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import coil3.load
+import coil3.request.crossfade
 import com.github.mttwmenezes.apodbrowser.R
 import com.github.mttwmenezes.apodbrowser.databinding.FeedItemApodBinding
 import com.github.mttwmenezes.apodbrowser.databinding.FeedItemExploreHintBinding
@@ -30,6 +31,7 @@ sealed class LatestFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(item
 
         private fun loadApodImage(imageUrl: String?) {
             binding.apodImage.load(imageUrl) {
+                crossfade(true)
                 listener(
                     onCancel = { showErrorPlaceholder() },
                     onError = { _, _ -> showErrorPlaceholder() }
