@@ -26,6 +26,7 @@ import com.github.mttwmenezes.apodbrowser.feature.other.extension.getColorFromAt
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.show
 import com.github.mttwmenezes.apodbrowser.feature.other.image.DeviceGallery
+import com.github.mttwmenezes.apodbrowser.feature.other.image.ImageSharer
 import com.google.android.material.R.attr.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -37,6 +38,7 @@ class ImageDetailActivity : AppCompatActivity() {
 
     @Inject lateinit var messages: ImageDetailMessages
     @Inject lateinit var deviceGallery: DeviceGallery
+    @Inject lateinit var imageSharer: ImageSharer
 
     private lateinit var apod: Apod
 
@@ -126,7 +128,7 @@ class ImageDetailActivity : AppCompatActivity() {
             dimensionRatio = "16:9"
             adjustViewBounds = false
             background = context.getColorFromAttr(colorSurfaceContainerHighest).toDrawable()
-            setImageDrawable(imageBrokenDrawable)
+            setImageDrawable(brokenImageDrawable)
             updatePadding(
                 left = paddingExtraLarge,
                 top = paddingExtraLarge,
@@ -136,7 +138,7 @@ class ImageDetailActivity : AppCompatActivity() {
         }
     }
 
-    private val imageBrokenDrawable
+    private val brokenImageDrawable
         get() = ResourcesCompat.getDrawable(resources, R.drawable.ic_broken_image, null)?.apply {
             setTint(ResourcesCompat.getColor(resources, R.color.surface_50, null))
         }
@@ -156,6 +158,11 @@ class ImageDetailActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.download_action -> {
                     downloadImage()
+                    true
+                }
+
+                R.id.share_action -> {
+                    shareImage()
                     true
                 }
 
@@ -182,6 +189,22 @@ class ImageDetailActivity : AppCompatActivity() {
     private fun onImageDownloadSuccess(image: Bitmap) = with(binding) {
         deviceGallery.add(image, apod.imageFilename)
         messages.showImageDownloadCompletedMessage(root = root, anchor = titleBar)
+    }
+
+    private fun shareImage() {
+        binding.image.load(if (apod.hasHdImage) apod.hdUrl else sdImageUrl) {
+            size(Size.ORIGINAL)
+            listener(
+                onCancel = { showUnexpectedErrorMessage() },
+                onError = { _, _ -> showUnexpectedErrorMessage() },
+                onSuccess = { _, result ->
+                    imageSharer.share(
+                        result.image.toBitmap(),
+                        onFailure = { showUnexpectedErrorMessage() }
+                    )
+                }
+            )
+        }
     }
 
     private fun setupImageForSuccessState() = with(binding.image) {

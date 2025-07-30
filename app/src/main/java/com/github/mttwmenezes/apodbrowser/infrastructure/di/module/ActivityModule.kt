@@ -5,6 +5,7 @@ import com.github.mttwmenezes.apodbrowser.ApodBrowserApp
 import com.github.mttwmenezes.apodbrowser.feature.home.view.HomeActivity
 import com.github.mttwmenezes.apodbrowser.feature.other.delegate.HomeLayoutDelegate
 import com.github.mttwmenezes.apodbrowser.feature.other.image.DeviceGallery
+import com.github.mttwmenezes.apodbrowser.feature.other.image.ImageSharer
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,4 +31,10 @@ object ActivityModule {
         @ActivityContext context: Context,
         applicationScope: CoroutineScope
     ) = DeviceGallery(context, applicationScope)
+
+    @Provides
+    fun provideImageSharer(
+        @ActivityContext context: Context,
+        applicationScope: CoroutineScope
+    ) = ImageSharer(context, applicationScope)
 }
