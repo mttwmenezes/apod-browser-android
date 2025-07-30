@@ -2,6 +2,7 @@ package com.github.mttwmenezes.apodbrowser.feature.image.view
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -16,12 +17,14 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import coil3.load
 import coil3.size.Size
+import coil3.toBitmap
 import com.github.mttwmenezes.apodbrowser.R
 import com.github.mttwmenezes.apodbrowser.data.model.Apod
 import com.github.mttwmenezes.apodbrowser.databinding.ActivityImageDetailBinding
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.getColorFromAttr
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.show
+import com.github.mttwmenezes.apodbrowser.feature.other.image.DeviceGallery
 import com.google.android.material.R.attr.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -32,6 +35,7 @@ class ImageDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityImageDetailBinding
 
     @Inject lateinit var messages: ImageDetailMessages
+    @Inject lateinit var deviceGallery: DeviceGallery
 
     private lateinit var apod: Apod
 
@@ -139,9 +143,43 @@ class ImageDetailActivity : AppCompatActivity() {
         get() = resources.getDimensionPixelSize(R.dimen.padding_extra_large)
 
     private fun onImageLoadSuccess() = with(binding) {
-        topAppBar.inflateMenu(R.menu.image_detail_top_app_bar_menu)
+        setupTopAppBarMenu()
         progressIndicator.hide()
         setupImageForSuccessState()
+    }
+
+    private fun setupTopAppBarMenu() = with(binding.topAppBar) {
+        inflateMenu(R.menu.image_detail_top_app_bar_menu)
+        setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.download_action -> {
+                    downloadImage()
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
+    private fun downloadImage() {
+        binding.image.load(if (apod.hasHdImage) apod.hdUrl else sdImageUrl) {
+            size(Size.ORIGINAL)
+            listener(
+                onCancel = { showUnexpectedErrorMessage() },
+                onError = { _, _ -> showUnexpectedErrorMessage() },
+                onSuccess = { _, result -> onImageDownloadSuccess(result.image.toBitmap()) }
+            )
+        }
+    }
+
+    private fun showUnexpectedErrorMessage() = with(binding) {
+        messages.showUnexpectedErrorMessage(root, anchor = titleBar)
+    }
+
+    private fun onImageDownloadSuccess(image: Bitmap) = with(binding) {
+        deviceGallery.add(image, apod.imageFilename)
+        messages.showImageDownloadCompletedMessage(root = root, anchor = titleBar)
     }
 
     private fun setupImageForSuccessState() = with(binding.image) {

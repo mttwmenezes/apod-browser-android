@@ -14,4 +14,16 @@ class ImageDetailMessages @Inject constructor() {
             .setAnchorView(anchor)
             .show()
     }
+
+    fun showImageDownloadCompletedMessage(root: View, anchor: View) {
+        Snackbar.make(root, R.string.message_image_download_completed, Snackbar.LENGTH_SHORT)
+            .setAnchorView(anchor)
+            .show()
+    }
+
+    fun showUnexpectedErrorMessage(root: View, anchor: View) {
+        Snackbar.make(root, R.string.message_unexpected_error_occurred, Snackbar.LENGTH_SHORT)
+            .setAnchorView(anchor)
+            .show()
+    }
 }

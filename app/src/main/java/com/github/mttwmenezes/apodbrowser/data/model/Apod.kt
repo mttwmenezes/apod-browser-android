@@ -30,6 +30,9 @@ data class Apod(
             append(month)
             append(day)
         }
+
+    val imageFilename: String
+        get() = "APOD_$condensedDate"
 }
 
 fun ApodResponse.toApod() = Apod(
