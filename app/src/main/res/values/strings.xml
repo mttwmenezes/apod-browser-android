@@ -44,6 +44,7 @@
 
     <!-- Image detail -->
     <string name="download_image_action_title">Download image</string>
+    <string name="message_image_unavailable">Image not available</string>
 
     <!-- Common: Message -->
     <string name="message_unexpected_error_occurred">Unexpected error occurred</string>

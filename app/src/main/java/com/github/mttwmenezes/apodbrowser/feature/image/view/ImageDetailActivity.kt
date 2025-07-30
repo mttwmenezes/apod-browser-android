@@ -5,14 +5,70 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.toDrawable
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
+import coil3.load
+import coil3.size.Size
+import com.github.mttwmenezes.apodbrowser.R
 import com.github.mttwmenezes.apodbrowser.data.model.Apod
 import com.github.mttwmenezes.apodbrowser.databinding.ActivityImageDetailBinding
+import com.github.mttwmenezes.apodbrowser.feature.other.extension.getColorFromAttr
+import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
+import com.github.mttwmenezes.apodbrowser.feature.other.extension.show
+import com.google.android.material.R.attr.*
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class ImageDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityImageDetailBinding
 
+    @Inject lateinit var messages: ImageDetailMessages
+
     private lateinit var apod: Apod
+
+    private var isImmersiveMode = false
+        set(value) {
+            field = value
+            onImmersiveModeChanged()
+        }
+
+    private fun onImmersiveModeChanged() {
+        if (isImmersiveMode) hideBars() else showBars()
+    }
+
+    private fun hideBars() = with(binding) {
+        appBarLayout.hide()
+        titleBar.hide()
+        hideSystemBars()
+    }
+
+    private fun hideSystemBars() {
+        windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
+    }
+
+    private val windowInsetsController
+        get() = WindowCompat.getInsetsController(window, window.decorView).apply {
+            systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+        }
+
+    private fun showBars() = with(binding) {
+        appBarLayout.show()
+        titleBar.show()
+        showSystemBars()
+    }
+
+    private fun showSystemBars() {
+        windowInsetsController.show(WindowInsetsCompat.Type.systemBars())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +76,90 @@ class ImageDetailActivity : AppCompatActivity() {
         binding = ActivityImageDetailBinding.inflate(layoutInflater)
         apod = intent.extras?.getSerializable(ARG_APOD, Apod::class.java) as Apod
         setContentView(binding.root)
+        configureUi()
+        loadImage()
+        applyWindowInsets()
+    }
+
+    private fun configureUi() = with(binding) {
+        topAppBar.setNavigationOnClickListener { finish() }
+        root.setOnClickListener { isImmersiveMode = !isImmersiveMode }
+        image.setOnClickListener { isImmersiveMode = !isImmersiveMode }
+        titleLabel.text = apod.title
+    }
+
+    private fun loadImage() = with(binding) {
+        image.load(if (apod.hasHdImage) apod.hdUrl else sdImageUrl) {
+            size(Size.ORIGINAL)
+            listener(
+                onStart = { onImageLoadStarted() },
+                onCancel = { onImageLoadFailed() },
+                onError = { _, _ -> onImageLoadFailed() },
+                onSuccess = { _, _ -> onImageLoadSuccess() }
+            )
+        }
+    }
+
+    private val sdImageUrl
+        get() = if (apod.isImage) apod.url else apod.thumbnailUrl
+
+    private fun onImageLoadStarted() = with(binding) {
+        topAppBar.menu.clear()
+        progressIndicator.show()
+    }
+
+    private fun onImageLoadFailed() = with(binding) {
+        topAppBar.menu.clear()
+        progressIndicator.hide()
+        setupImageForErrorState()
+        messages.showImageUnavailableMessage(root, anchor = titleBar)
+    }
+
+    private fun setupImageForErrorState() = with(binding.image) {
+        updateLayoutParams<ConstraintLayout.LayoutParams> {
+            dimensionRatio = "16:9"
+            adjustViewBounds = false
+            background = context.getColorFromAttr(colorSurfaceContainerHighest).toDrawable()
+            setImageDrawable(imageBrokenDrawable)
+            updatePadding(
+                left = paddingExtraLarge,
+                top = paddingExtraLarge,
+                right = paddingExtraLarge,
+                bottom = paddingExtraLarge
+            )
+        }
+    }
+
+    private val imageBrokenDrawable
+        get() = ResourcesCompat.getDrawable(resources, R.drawable.ic_broken_image, null)?.apply {
+            setTint(ResourcesCompat.getColor(resources, R.color.surface_50, null))
+        }
+
+    private val paddingExtraLarge
+        get() = resources.getDimensionPixelSize(R.dimen.padding_extra_large)
+
+    private fun onImageLoadSuccess() = with(binding) {
+        topAppBar.inflateMenu(R.menu.image_detail_top_app_bar_menu)
+        progressIndicator.hide()
+        setupImageForSuccessState()
+    }
+
+    private fun setupImageForSuccessState() = with(binding.image) {
+        updateLayoutParams<ConstraintLayout.LayoutParams> {
+            dimensionRatio = null
+            adjustViewBounds = true
+            background = null
+            updatePadding(left = 0, top = 0, right = 0, bottom = 0)
+        }
+    }
+
+    private fun applyWindowInsets() = with(binding) {
+        ViewCompat.setOnApplyWindowInsetsListener(root) { _, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            topAppBar.updatePadding(left = systemBars.left, right = systemBars.right)
+            titleLabel.updatePadding(bottom = systemBars.bottom)
+            insets
+        }
     }
 
     companion object {

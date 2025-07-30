@@ -20,6 +20,9 @@ data class Apod(
     val isImage get() = mediaType == "image"
     val isVideo get() = mediaType == "video"
 
+    val hasHdImage
+        get() = !hdUrl.isNullOrBlank() && hdUrl != url
+
     val condensedDate
         get() = buildString {
             val (year, month, day) = date.split("-")

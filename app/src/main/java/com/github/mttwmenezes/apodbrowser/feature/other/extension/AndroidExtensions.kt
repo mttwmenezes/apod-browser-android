@@ -5,9 +5,12 @@ import android.content.Intent
 import android.text.SpannableString
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.util.TypedValue
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.AttrRes
+import androidx.annotation.ColorInt
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.core.net.toUri
@@ -65,4 +68,14 @@ fun Context.shareUrl(url: String, chooserTitle: String? = null) {
     }
 
     startActivity(Intent.createChooser(intent, chooserTitle))
+}
+
+@ColorInt
+fun Context.getColorFromAttr(
+    @AttrRes attrColor: Int,
+    typedValue: TypedValue = TypedValue(),
+    resolveRefs: Boolean = true
+): Int {
+    theme.resolveAttribute(attrColor, typedValue, resolveRefs)
+    return typedValue.data
 }
