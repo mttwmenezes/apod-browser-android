@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
 import coil3.load
+import coil3.request.crossfade
 import com.github.mttwmenezes.apodbrowser.databinding.FeedItemBookmarkBinding
 import com.github.mttwmenezes.apodbrowser.feature.bookmarks.model.BookmarksFeedItem
 
@@ -19,6 +20,7 @@ sealed class BookmarksFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(i
             onItemClickListener: (String) -> Unit
         ) = with(binding) {
             image.load(item.imageUrl) {
+                crossfade(true)
                 listener(
                     onStart = { onImageLoadStarted() },
                     onSuccess = { _, _ -> onImageLoadSuccess() }
