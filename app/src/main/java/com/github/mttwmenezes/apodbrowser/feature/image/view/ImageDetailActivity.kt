@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import coil3.load
+import coil3.request.crossfade
 import coil3.size.Size
 import coil3.toBitmap
 import com.github.mttwmenezes.apodbrowser.R
@@ -95,6 +96,7 @@ class ImageDetailActivity : AppCompatActivity() {
     private fun loadImage() = with(binding) {
         image.load(if (apod.hasHdImage) apod.hdUrl else sdImageUrl) {
             size(Size.ORIGINAL)
+            crossfade(true)
             listener(
                 onStart = { onImageLoadStarted() },
                 onCancel = { onImageLoadFailed() },
