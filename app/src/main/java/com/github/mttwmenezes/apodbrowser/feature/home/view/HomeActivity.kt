@@ -11,7 +11,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.github.mttwmenezes.apodbrowser.R
 import com.github.mttwmenezes.apodbrowser.databinding.ActivityHomeBinding
 import com.github.mttwmenezes.apodbrowser.feature.other.delegate.HomeLayoutDelegate
-import com.github.mttwmenezes.apodbrowser.feature.other.event.ExploreActionClickEvent
+import com.github.mttwmenezes.apodbrowser.feature.other.event.ExploreActionClicked
 import com.github.mttwmenezes.apodbrowser.feature.other.event.RefreshActionClicked
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.setOnQueryTextChangedListener
 import com.github.mttwmenezes.apodbrowser.infrastructure.event.EventPublisher
@@ -72,7 +72,7 @@ class HomeActivity : AppCompatActivity(), HomeLayoutDelegate {
         setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.explore_action -> {
-                    eventPublisher.publish(ExploreActionClickEvent)
+                    eventPublisher.publish(ExploreActionClicked)
                     true
                 }
 
