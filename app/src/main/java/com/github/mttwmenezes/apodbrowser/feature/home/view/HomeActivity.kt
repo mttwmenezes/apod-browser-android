@@ -12,6 +12,7 @@ import com.github.mttwmenezes.apodbrowser.R
 import com.github.mttwmenezes.apodbrowser.databinding.ActivityHomeBinding
 import com.github.mttwmenezes.apodbrowser.feature.other.delegate.HomeLayoutDelegate
 import com.github.mttwmenezes.apodbrowser.feature.other.event.ExploreActionClickEvent
+import com.github.mttwmenezes.apodbrowser.feature.other.event.RefreshActionClicked
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.setOnQueryTextChangedListener
 import com.github.mttwmenezes.apodbrowser.infrastructure.event.EventPublisher
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -76,7 +77,7 @@ class HomeActivity : AppCompatActivity(), HomeLayoutDelegate {
                 }
 
                 R.id.refresh_action -> {
-                    // TODO To be implemented
+                    eventPublisher.publish(RefreshActionClicked)
                     true
                 }
 

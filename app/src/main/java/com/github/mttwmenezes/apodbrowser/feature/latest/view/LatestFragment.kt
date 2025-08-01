@@ -23,6 +23,7 @@ import com.github.mttwmenezes.apodbrowser.feature.other.delegate.HomeLayoutDeleg
 import com.github.mttwmenezes.apodbrowser.feature.other.event.DatePicked
 import com.github.mttwmenezes.apodbrowser.feature.other.event.ExploreActionClickEvent
 import com.github.mttwmenezes.apodbrowser.feature.other.event.ExploreOptionClicked
+import com.github.mttwmenezes.apodbrowser.feature.other.event.RefreshActionClicked
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.show
 import com.github.mttwmenezes.apodbrowser.infrastructure.event.EventObserver
@@ -125,6 +126,7 @@ class LatestFragment : Fragment(), LatestFeedAdapter.Listener, EventObserver {
             is ExploreActionClickEvent -> showExploreSheet()
             is ExploreOptionClicked -> handleExploreOptionClicked(event)
             is DatePicked -> fetchApodFromDate(event.dateInMillis)
+            is RefreshActionClicked -> viewModel.fetchLatest()
         }
     }
 
