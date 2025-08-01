@@ -13,6 +13,7 @@ import com.github.mttwmenezes.apodbrowser.databinding.ActivityHomeBinding
 import com.github.mttwmenezes.apodbrowser.feature.other.delegate.HomeLayoutDelegate
 import com.github.mttwmenezes.apodbrowser.feature.other.event.ExploreActionClicked
 import com.github.mttwmenezes.apodbrowser.feature.other.event.RefreshActionClicked
+import com.github.mttwmenezes.apodbrowser.feature.other.extension.openWebPage
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.setOnQueryTextChangedListener
 import com.github.mttwmenezes.apodbrowser.infrastructure.event.EventPublisher
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -82,7 +83,7 @@ class HomeActivity : AppCompatActivity(), HomeLayoutDelegate {
                 }
 
                 R.id.official_website_action -> {
-                    // TODO To be implemented
+                    openWebPage(getString(R.string.apod_home_url))
                     true
                 }
 

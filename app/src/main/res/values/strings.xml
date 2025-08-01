@@ -70,6 +70,7 @@
     <!-- URL -->
     <string name="apod_url_format">https://apod.nasa.gov/apod/ap%s.html</string>
     <string name="archive_url">https://apod.nasa.gov/apod/archivepix.html</string>
+    <string name="apod_home_url">https://apod.nasa.gov/apod/</string>
 
     <!-- Example -->
     <string name="example_apod_title">Autumn Moon Encore</string>
