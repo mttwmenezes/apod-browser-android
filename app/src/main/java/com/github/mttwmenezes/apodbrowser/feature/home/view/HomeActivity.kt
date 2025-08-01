@@ -13,8 +13,10 @@ import com.github.mttwmenezes.apodbrowser.databinding.ActivityHomeBinding
 import com.github.mttwmenezes.apodbrowser.feature.other.delegate.HomeLayoutDelegate
 import com.github.mttwmenezes.apodbrowser.feature.other.event.ExploreActionClicked
 import com.github.mttwmenezes.apodbrowser.feature.other.event.RefreshActionClicked
+import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.openWebPage
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.setOnQueryTextChangedListener
+import com.github.mttwmenezes.apodbrowser.feature.other.extension.show
 import com.github.mttwmenezes.apodbrowser.infrastructure.event.EventPublisher
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,10 +63,16 @@ class HomeActivity : AppCompatActivity(), HomeLayoutDelegate {
     private fun configureOnDestinationChangedListener() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.latest -> configureLatestTopAppBarMenu()
-                R.id.bookmarks -> configureBookmarksTopAppBarMenu()
+                R.id.latest -> onLatestDestination()
+                R.id.bookmarks -> onBookmarksDestination()
+                R.id.settings -> onSettingsDestination()
             }
         }
+    }
+
+    private fun onLatestDestination() = with(binding) {
+        navigationBar.show()
+        configureLatestTopAppBarMenu()
     }
 
     private fun configureLatestTopAppBarMenu() = with(binding.topAppBar) {
@@ -88,13 +96,18 @@ class HomeActivity : AppCompatActivity(), HomeLayoutDelegate {
                 }
 
                 R.id.settings_action -> {
-                    // TODO To be implemented
+                    navController.navigate(R.id.to_settings)
                     true
                 }
 
                 else -> false
             }
         }
+    }
+
+    private fun onBookmarksDestination() = with(binding) {
+        navigationBar.show()
+        configureBookmarksTopAppBarMenu()
     }
 
     private fun configureBookmarksTopAppBarMenu() = with(binding.topAppBar) {
@@ -119,5 +132,10 @@ class HomeActivity : AppCompatActivity(), HomeLayoutDelegate {
         searchActionView.setOnQueryTextChangedListener {
             // TODO To be implemented
         }
+    }
+
+    private fun onSettingsDestination() = with(binding) {
+        topAppBar.menu.clear()
+        binding.navigationBar.hide()
     }
 }
