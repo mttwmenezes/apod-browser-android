@@ -10,9 +10,12 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.github.mttwmenezes.apodbrowser.R
 import com.github.mttwmenezes.apodbrowser.databinding.ActivityHomeBinding
+import com.github.mttwmenezes.apodbrowser.feature.home.TopLevelDestination
 import com.github.mttwmenezes.apodbrowser.feature.other.delegate.HomeLayoutDelegate
 import com.github.mttwmenezes.apodbrowser.feature.other.event.ExploreActionClicked
 import com.github.mttwmenezes.apodbrowser.feature.other.event.RefreshActionClicked
+import com.github.mttwmenezes.apodbrowser.feature.other.event.SearchBarQueryTextChanged
+import com.github.mttwmenezes.apodbrowser.feature.other.event.TopLevelDestinationChanged
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.openWebPage
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.setOnQueryTextChangedListener
@@ -63,9 +66,20 @@ class HomeActivity : AppCompatActivity(), HomeLayoutDelegate {
     private fun configureOnDestinationChangedListener() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.latest -> onLatestDestination()
-                R.id.bookmarks -> onBookmarksDestination()
-                R.id.settings -> onSettingsDestination()
+                R.id.latest -> {
+                    onLatestDestination()
+                    eventPublisher.publish(TopLevelDestinationChanged(TopLevelDestination.Latest))
+                }
+
+                R.id.bookmarks -> {
+                    onBookmarksDestination()
+                    eventPublisher.publish(TopLevelDestinationChanged(TopLevelDestination.Bookmarks))
+                }
+
+                R.id.settings -> {
+                    onSettingsDestination()
+                    eventPublisher.publish(TopLevelDestinationChanged(TopLevelDestination.Settings))
+                }
             }
         }
     }
@@ -130,7 +144,7 @@ class HomeActivity : AppCompatActivity(), HomeLayoutDelegate {
         val searchActionView = findItem(R.id.search_action).actionView as SearchView
         searchActionView.queryHint = getString(R.string.action_title_search_bookmarks)
         searchActionView.setOnQueryTextChangedListener {
-            // TODO To be implemented
+            eventPublisher.publish(SearchBarQueryTextChanged(it))
         }
     }
 

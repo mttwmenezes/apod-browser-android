@@ -31,6 +31,7 @@
     <string name="action_title_search_bookmarks">Search bookmarks</string>
     <string name="bookmarks_empty_title">No bookmarks</string>
     <string name="bookmarks_empty_message">Your bookmarks will appear here.</string>
+    <string name="bookmarks_empty_search_message">No matching bookmarks found.</string>
 
     <!-- Detail -->
     <string name="image_copyright_action_title">Image credits</string>

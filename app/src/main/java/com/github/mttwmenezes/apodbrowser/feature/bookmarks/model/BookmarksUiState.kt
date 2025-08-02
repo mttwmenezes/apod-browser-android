@@ -6,5 +6,6 @@ data class BookmarksUiState(
     val isEmpty: Boolean = false,
     val isFailure: Boolean = false,
     val isSuccess: Boolean = false,
+    val isSearchEmpty: Boolean = false,
     val bookmarks: List<Apod> = emptyList()
 )

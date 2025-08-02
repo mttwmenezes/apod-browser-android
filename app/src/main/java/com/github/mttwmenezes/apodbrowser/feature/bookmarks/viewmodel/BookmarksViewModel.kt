@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -24,7 +25,7 @@ class BookmarksViewModel @Inject constructor(
         fetchBookmarks()
     }
 
-    private fun fetchBookmarks() {
+    fun fetchBookmarks() {
         viewModelScope.launch {
             repository.fetchAll()
                 .catch { _uiState.value = failureState }
@@ -40,6 +41,22 @@ class BookmarksViewModel @Inject constructor(
         BookmarksUiState(isSuccess = true, bookmarks = bookmarks.reversed())
 
     private val emptyState get() = BookmarksUiState(isEmpty = true)
+
+    fun findBookmarksBy(searchQuery: String) {
+        viewModelScope.launch {
+            repository.findByQuery(searchQuery)
+                .catch { _uiState.value = failureState }
+                .collect { bookmarks ->
+                    _uiState.update {
+                        if (bookmarks.isNotEmpty()) {
+                            it.copy(isSearchEmpty = false, bookmarks = bookmarks.reversed())
+                        } else {
+                            it.copy(isSuccess = false, isSearchEmpty = true, bookmarks = emptyList())
+                        }
+                    }
+                }
+        }
+    }
 
     fun findBookmarkBy(id: String) = uiState.value.bookmarks.find { it.date == id }
 }
