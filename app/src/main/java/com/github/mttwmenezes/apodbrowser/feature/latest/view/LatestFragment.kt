@@ -121,7 +121,7 @@ class LatestFragment : Fragment(), LatestFeedAdapter.Listener, EventObserver {
     }
 
     override fun onFeedItemExploreHintClicked() {
-        // TODO To be implemented
+        showExploreSheet()
     }
 
     override fun onEvent(event: Any) {
