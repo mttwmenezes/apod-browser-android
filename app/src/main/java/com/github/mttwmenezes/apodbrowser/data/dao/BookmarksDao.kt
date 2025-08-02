@@ -20,4 +20,7 @@ interface BookmarksDao {
 
     @Query("SELECT * FROM apod")
     fun fetchAll(): Flow<List<Apod>>
+
+    @Query("SELECT * FROM apod WHERE title LIKE '%' || :queryText || '%'")
+    fun findByQuery(queryText: String): Flow<List<Apod>>
 }
