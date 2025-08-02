@@ -21,6 +21,7 @@ import com.github.mttwmenezes.apodbrowser.feature.detail.view.DetailActivity
 import com.github.mttwmenezes.apodbrowser.feature.other.delegate.HomeLayoutDelegate
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.show
+import com.github.mttwmenezes.apodbrowser.feature.other.sheet.FeedItemOptionsSheet
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -107,6 +108,12 @@ class BookmarksFragment : Fragment(), BookmarksFeedAdapter.Listener {
 
     override fun onFeedItemClicked(id: String) {
         viewModel.findBookmarkBy(id)?.let { DetailActivity.start(requireContext(), it) }
+    }
+
+    override fun onFeedItemLongClicked(id: String) {
+        viewModel.findBookmarkBy(id)?.let {
+            FeedItemOptionsSheet.newInstance(it).show(childFragmentManager, null)
+        }
     }
 
     override fun onDestroyView() {

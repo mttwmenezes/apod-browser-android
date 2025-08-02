@@ -26,6 +26,7 @@ import com.github.mttwmenezes.apodbrowser.feature.other.event.ExploreOptionClick
 import com.github.mttwmenezes.apodbrowser.feature.other.event.RefreshActionClicked
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.show
+import com.github.mttwmenezes.apodbrowser.feature.other.sheet.FeedItemOptionsSheet
 import com.github.mttwmenezes.apodbrowser.infrastructure.event.EventObserver
 import com.github.mttwmenezes.apodbrowser.infrastructure.event.EventSubscriber
 import dagger.hilt.android.AndroidEntryPoint
@@ -114,7 +115,9 @@ class LatestFragment : Fragment(), LatestFeedAdapter.Listener, EventObserver {
     }
 
     override fun onFeedItemOptionsClicked(id: String) {
-        // TODO To be implemented
+        viewModel.findApodBy(id)?.let {
+            FeedItemOptionsSheet.newInstance(it).show(childFragmentManager, null)
+        }
     }
 
     override fun onFeedItemExploreHintClicked() {

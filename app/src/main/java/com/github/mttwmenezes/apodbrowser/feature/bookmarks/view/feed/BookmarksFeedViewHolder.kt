@@ -17,7 +17,8 @@ sealed class BookmarksFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(i
 
         fun bind(
             item: BookmarksFeedItem.Apod,
-            onItemClickListener: (String) -> Unit
+            onItemClickListener: (String) -> Unit,
+            onItemLongClickListener: (String) -> Unit
         ) = with(binding) {
             image.load(item.imageUrl) {
                 crossfade(true)
@@ -29,6 +30,10 @@ sealed class BookmarksFeedViewHolder(itemView: View) : RecyclerView.ViewHolder(i
             titleLabel.text = item.title
             mediaTypeLabel.text = item.mediaType
             rippleOverlay.setOnClickListener { onItemClickListener(item.itemId) }
+            rippleOverlay.setOnLongClickListener {
+                onItemLongClickListener(item.itemId)
+                true
+            }
         }
 
         private fun onImageLoadStarted() = with(binding.image) {

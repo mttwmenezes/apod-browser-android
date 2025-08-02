@@ -29,13 +29,16 @@ class BookmarksFeedAdapter(
         if (holder is BookmarksFeedViewHolder.Apod) {
             holder.bind(
                 item = getItem(position) as BookmarksFeedItem.Apod,
-                onItemClickListener = { listener.onFeedItemClicked(it) }
+                onItemClickListener = { listener.onFeedItemClicked(it) },
+                onItemLongClickListener = { listener.onFeedItemLongClicked(it) }
             )
         }
     }
 
     interface Listener {
         fun onFeedItemClicked(id: String)
+
+        fun onFeedItemLongClicked(id: String)
     }
 
     companion object {
