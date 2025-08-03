@@ -100,6 +100,7 @@ class LatestFragment : Fragment(), LatestFeedAdapter.Listener, EventObserver {
         errorPlaceholder.apply {
             root.show()
             tryAgainButton.setOnClickListener { viewModel.fetchLatest() }
+            content.y -= homeLayoutDelegate.navigationBar.height
         }
     }
 
