@@ -131,7 +131,7 @@ class HomeActivity : AppCompatActivity(), HomeLayoutDelegate {
         setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.settings_action -> {
-                    // TODO To be implemented
+                    navController.navigate(R.id.to_settings)
                     true
                 }
 
