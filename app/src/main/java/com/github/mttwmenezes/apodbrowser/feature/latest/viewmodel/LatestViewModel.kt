@@ -52,6 +52,6 @@ class LatestViewModel @Inject constructor(
 
     fun fetchRandom(onComplete: (Apod?) -> Unit) {
         fetchApodJob?.cancel()
-        fetchLatestJob = viewModelScope.launch { onComplete(repository.fetchRandom()) }
+        fetchApodJob = viewModelScope.launch { onComplete(repository.fetchRandom()) }
     }
 }
