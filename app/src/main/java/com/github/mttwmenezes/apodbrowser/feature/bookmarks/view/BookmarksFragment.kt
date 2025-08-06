@@ -96,7 +96,12 @@ class BookmarksFragment : Fragment(), BookmarksFeedAdapter.Listener, EventObserv
     private fun onEmptyBookmarks() = with(binding) {
         feedRecyclerView.hide()
         emptyPlaceholder.root.show()
+        resetEmptyPlaceholderVerticalPosition()
         emptyPlaceholder.content.y -= homeLayoutDelegate.navigationBar.height
+    }
+
+    private fun resetEmptyPlaceholderVerticalPosition() {
+        binding.emptyPlaceholder.content.y = 0f
     }
 
     private fun onFailure() = with(binding) {
@@ -119,6 +124,7 @@ class BookmarksFragment : Fragment(), BookmarksFeedAdapter.Listener, EventObserv
         emptyPlaceholder.apply {
             root.show()
             messageLabel.text = getString(R.string.bookmarks_empty_search_message)
+            resetEmptyPlaceholderVerticalPosition()
             content.y -= homeLayoutDelegate.navigationBar.height
         }
     }
