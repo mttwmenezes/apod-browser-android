@@ -100,8 +100,13 @@ class LatestFragment : Fragment(), LatestFeedAdapter.Listener, EventObserver {
         errorPlaceholder.apply {
             root.show()
             tryAgainButton.setOnClickListener { viewModel.fetchLatest() }
+            resetErrorPlaceholderVerticalPosition()
             content.y -= homeLayoutDelegate.navigationBar.height
         }
+    }
+
+    private fun resetErrorPlaceholderVerticalPosition() {
+        binding.errorPlaceholder.content.y = 0f
     }
 
     private fun onSuccess(apods: List<Apod>) = with(binding) {
