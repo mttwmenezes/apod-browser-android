@@ -92,4 +92,7 @@ dependencies {
 
     // PhotoView
     implementation(libs.photoview)
+
+    // Preference
+    implementation(libs.androidx.preference)
 }
