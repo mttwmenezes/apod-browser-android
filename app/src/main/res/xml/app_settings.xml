@@ -12,4 +12,14 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/preference_category_title_app_info">
+
+        <Preference
+            android:icon="@drawable/ic_info"
+            android:key="app_version"
+            android:title="@string/preference_title_app_version"
+            tools:summary="stable-1.0" />
+
+    </PreferenceCategory>
+
 </androidx.preference.PreferenceScreen>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.github.mttwmenezes.apodbrowser.BuildConfig
 import com.github.mttwmenezes.apodbrowser.R
 import com.github.mttwmenezes.apodbrowser.feature.settings.other.ImageCachePreference
 import com.github.mttwmenezes.apodbrowser.infrastructure.storage.DirectoryUtils
@@ -31,6 +32,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         configureImageCacheOption()
+        configureAppVersionOption()
     }
 
     private fun configureImageCacheOption() {
@@ -38,6 +40,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
             R.string.preference_summary_image_cache,
             DirectoryUtils.sizeFormatted(imageCache.size)
         )
+    }
+
+    private fun configureAppVersionOption() {
+        findPreference<Preference>(APP_VERSION_KEY)?.let { it.summary = BuildConfig.VERSION_NAME }
     }
 
     override fun onPreferenceTreeClick(preference: Preference): Boolean {
@@ -76,5 +82,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
 
     companion object {
         private const val IMAGE_CACHE_KEY = "image_cache"
+        private const val APP_VERSION_KEY = "app_version"
     }
 }

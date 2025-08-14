@@ -55,6 +55,8 @@
     <string name="dialog_title_clear_image_cache">Clear image cache</string>
     <string name="dialog_message_clear_image_cache">To optimize your experience, APOD Browser stores images for faster access. Clearing the image cache will free up storage space by removing these stored images. This may result in slightly longer loading times for images the next time you view them.</string>
     <string name="message_image_cache_cleared">Image cache cleared</string>
+    <string name="preference_category_title_app_info">App info</string>
+    <string name="preference_title_app_version">Version</string>
 
     <!-- Common: Message -->
     <string name="message_unexpected_error_occurred">Unexpected error occurred</string>
