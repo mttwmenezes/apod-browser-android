@@ -17,6 +17,7 @@
 package com.github.mttwmenezes.apodbrowser.feature.home.view
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
@@ -24,6 +25,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import com.github.mttwmenezes.apodbrowser.BuildConfig
 import com.github.mttwmenezes.apodbrowser.R
 import com.github.mttwmenezes.apodbrowser.databinding.ActivityHomeBinding
 import com.github.mttwmenezes.apodbrowser.feature.home.TopLevelDestination
@@ -61,6 +63,7 @@ class HomeActivity : AppCompatActivity(), HomeLayoutDelegate {
         configureNavController()
         configureUi()
         configureOnDestinationChangedListener()
+        Log.d(this::class.simpleName, "onCreate: Current build type: ${BuildConfig.BUILD_TYPE}")
     }
 
     private fun configureNavController() {
