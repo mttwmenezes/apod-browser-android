@@ -28,15 +28,29 @@ android {
         debug {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
+            manifestPlaceholders["fileProviderAuthority"] = buildString {
+                append("com.github.mttwmenezes.apodbrowser")
+                append(".debug")
+                append(".fileprovider")
+            }
         }
         create("staging") {
             initWith(getByName("debug"))
             applicationIdSuffix = ".staging"
             versionNameSuffix = "-staging"
+            manifestPlaceholders["fileProviderAuthority"] = buildString {
+                append("com.github.mttwmenezes.apodbrowser")
+                append(".staging")
+                append(".fileprovider")
+            }
         }
         release {
             isMinifyEnabled = true
             isShrinkResources = true
+            manifestPlaceholders["fileProviderAuthority"] = buildString {
+                append("com.github.mttwmenezes.apodbrowser")
+                append(".fileprovider")
+            }
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"

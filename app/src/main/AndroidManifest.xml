@@ -41,7 +41,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.github.mttwmenezes.apodbrowser.fileprovider"
+            android:authorities="${fileProviderAuthority}"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
