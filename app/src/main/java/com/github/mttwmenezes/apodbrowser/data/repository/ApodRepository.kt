@@ -16,8 +16,11 @@
 
 package com.github.mttwmenezes.apodbrowser.data.repository
 
+import com.github.mttwmenezes.apodbrowser.BuildConfig
+import com.github.mttwmenezes.apodbrowser.data.model.Apod
 import com.github.mttwmenezes.apodbrowser.data.model.toApod
 import com.github.mttwmenezes.apodbrowser.data.source.ApodRemoteDataSource
+import com.github.mttwmenezes.apodbrowser.data.source.staged.ApodStagedDataSource
 import com.github.mttwmenezes.apodbrowser.infrastructure.date.Date
 import com.github.mttwmenezes.apodbrowser.infrastructure.date.format.DateFormatter
 import kotlinx.coroutines.CoroutineDispatcher
@@ -26,11 +29,31 @@ import javax.inject.Inject
 
 class ApodRepository @Inject constructor(
     private val source: ApodRemoteDataSource,
+    private val stagedSource: ApodStagedDataSource,
     private val dateFormatter: DateFormatter,
     private val dispatcher: CoroutineDispatcher
 ) {
     suspend fun fetchLatest() = withContext(dispatcher) {
-        source.fetchFromDateRange(startDate = pastWeek).map { it.toApod() }.reversed()
+        if (BuildConfig.BUILD_TYPE == "staging") {
+            stagedSource.fetch()
+                .getOrElse { emptyList() }
+                .map { it.toApod() }
+                .also { assignDescendingDates(it) }
+        } else {
+            source.fetchFromDateRange(startDate = pastWeek).map { it.toApod() }.reversed()
+        }
+    }
+
+    private fun assignDescendingDates(apods: List<Apod>): List<Apod> {
+        val today = Date.now()
+        return apods.mapIndexed { index, apod ->
+            apod.copy(
+                date = dateFormatter.format(
+                    date = today.minusDays(index.toLong()),
+                    style = DateFormatter.Style.Iso
+                )
+            )
+        }
     }
 
     private val pastWeek

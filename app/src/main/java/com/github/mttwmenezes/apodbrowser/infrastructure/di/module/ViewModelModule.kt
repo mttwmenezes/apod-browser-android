@@ -58,4 +58,7 @@ object ViewModelModule {
         decoder = json,
         rawJson = readRawResource(context, R.raw.apod_response_200)
     )
+
+    @Provides
+    fun provideJsonDecoder() = Json { ignoreUnknownKeys = true }
 }

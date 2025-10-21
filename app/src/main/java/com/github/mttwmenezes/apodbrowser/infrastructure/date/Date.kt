@@ -35,6 +35,8 @@ class Date private constructor(val wrapped: LocalDate) {
 
     fun minusWeeks(count: Long) = Date(LocalDate.now().minusWeeks(count))
 
+    fun minusDays(count: Long) = Date(LocalDate.now().minusDays(count))
+
     enum class Interval {
         Days,
         Weeks,
