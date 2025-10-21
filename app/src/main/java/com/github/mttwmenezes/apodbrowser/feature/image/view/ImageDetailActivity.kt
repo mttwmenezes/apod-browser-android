@@ -21,6 +21,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
@@ -43,6 +44,7 @@ import com.github.mttwmenezes.apodbrowser.feature.other.extension.hide
 import com.github.mttwmenezes.apodbrowser.feature.other.extension.show
 import com.github.mttwmenezes.apodbrowser.feature.other.image.DeviceGallery
 import com.github.mttwmenezes.apodbrowser.feature.other.image.ImageSharer
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.R.attr.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -57,6 +59,8 @@ class ImageDetailActivity : AppCompatActivity() {
     @Inject lateinit var imageSharer: ImageSharer
 
     private lateinit var apod: Apod
+
+    private var preparingImageDialog: AlertDialog? = null
 
     private var isImmersiveMode = false
         set(value) {
@@ -214,13 +218,30 @@ class ImageDetailActivity : AppCompatActivity() {
                 onCancel = { showUnexpectedErrorMessage() },
                 onError = { _, _ -> showUnexpectedErrorMessage() },
                 onSuccess = { _, result ->
+                    showPreparingImageDialog()
                     imageSharer.share(
                         result.image.toBitmap(),
-                        onFailure = { showUnexpectedErrorMessage() }
+                        onSuccess = { dismissPreparingImageDialog() },
+                        onFailure = {
+                            dismissPreparingImageDialog()
+                            showUnexpectedErrorMessage()
+                        }
                     )
                 }
             )
         }
+    }
+
+    private fun showPreparingImageDialog() {
+        preparingImageDialog = MaterialAlertDialogBuilder(this)
+            .setView(R.layout.dialog_preparing_image)
+            .setCancelable(false)
+            .show()
+    }
+
+    private fun dismissPreparingImageDialog() {
+        preparingImageDialog?.dismiss()
+        preparingImageDialog = null
     }
 
     private fun setupImageForSuccessState() = with(binding.image) {

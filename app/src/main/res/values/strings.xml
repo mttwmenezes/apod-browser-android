@@ -47,6 +47,7 @@
     <string name="download_image_action_title">Download image</string>
     <string name="message_image_unavailable">Image not available</string>
     <string name="message_image_download_completed">Image added to gallery</string>
+    <string name="preparing_image_dialog_title">Preparing image. Please wait…</string>
 
     <!-- Settings -->
     <string name="preference_category_title_storage">Storage</string>
