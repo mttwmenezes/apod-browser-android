@@ -16,7 +16,7 @@
 
 package com.github.mttwmenezes.apodbrowser.data.repository
 
-import com.github.mttwmenezes.apodbrowser.BuildConfig
+import com.github.mttwmenezes.apodbrowser.BuildType
 import com.github.mttwmenezes.apodbrowser.data.model.Apod
 import com.github.mttwmenezes.apodbrowser.data.model.toApod
 import com.github.mttwmenezes.apodbrowser.data.source.ApodRemoteDataSource
@@ -31,10 +31,11 @@ class ApodRepository @Inject constructor(
     private val source: ApodRemoteDataSource,
     private val stagedSource: ApodStagedDataSource,
     private val dateFormatter: DateFormatter,
-    private val dispatcher: CoroutineDispatcher
+    private val dispatcher: CoroutineDispatcher,
+    private val buildType: BuildType
 ) {
     suspend fun fetchLatest() = withContext(dispatcher) {
-        if (BuildConfig.BUILD_TYPE == "staging") {
+        if (buildType == BuildType.STAGING) {
             stagedSource.fetch()
                 .getOrElse { emptyList() }
                 .map { it.toApod() }

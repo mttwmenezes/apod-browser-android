@@ -18,8 +18,12 @@ package com.github.mttwmenezes.apodbrowser.infrastructure.di.module
 
 import android.content.Context
 import com.github.mttwmenezes.apodbrowser.BuildConfig
+import com.github.mttwmenezes.apodbrowser.BuildType
 import com.github.mttwmenezes.apodbrowser.R
+import com.github.mttwmenezes.apodbrowser.data.repository.ApodRepository
+import com.github.mttwmenezes.apodbrowser.data.source.ApodRemoteDataSource
 import com.github.mttwmenezes.apodbrowser.data.source.staged.ApodStagedDataSource
+import com.github.mttwmenezes.apodbrowser.infrastructure.date.format.DateFormatter
 import com.github.mttwmenezes.apodbrowser.infrastructure.network.service.ApodService
 import com.github.mttwmenezes.apodbrowser.infrastructure.util.readRawResource
 import dagger.Module
@@ -27,6 +31,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -61,4 +66,16 @@ object ViewModelModule {
 
     @Provides
     fun provideJsonDecoder() = Json { ignoreUnknownKeys = true }
+
+    @Provides
+    fun provideApodRepository(
+        remoteSource: ApodRemoteDataSource,
+        stagedSource: ApodStagedDataSource,
+        dateFormatter: DateFormatter,
+        dispatcher: CoroutineDispatcher,
+        buildType: BuildType
+    ) = ApodRepository(remoteSource, stagedSource, dateFormatter, dispatcher, buildType)
+
+    @Provides
+    fun provideBuildType() = BuildType.current
 }
