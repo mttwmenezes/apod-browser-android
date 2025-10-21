@@ -39,7 +39,7 @@ class ApodRepository @Inject constructor(
             stagedSource.fetch()
                 .getOrElse { emptyList() }
                 .map { it.toApod() }
-                .also { assignDescendingDates(it) }
+                .let { assignDescendingDates(it) }
         } else {
             source.fetchFromDateRange(startDate = pastWeek).map { it.toApod() }.reversed()
         }
