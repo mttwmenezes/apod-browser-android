@@ -25,6 +25,14 @@ This app makes use of the [APOD API](https://github.com/nasa/apod-api), which is
 
 OBS: By default, the app utilizes the `DEMO_KEY`, a public API key intended for testing purposes, allowing access to all functionalities. If you prefer to use your own API key, which can be generated at [NASA's Open APIs website](https://api.nasa.gov/), simply open the `ApodService.kt` file and replace all instances of `BuildConfig.PUBLIC_KEY`.
 
+#### Staging build
+This project includes a staging build that allows you to test most of the app's features without relying on the actual APOD API. The staging build supports testing by providing the necessary data for the Latest screen.
+<p>Follow these steps to run the staging build:</p>
+
+1. Navigate to Build in the menu and select Select Build Variant....
+2. From the dropdown menu, choose the staging option.
+3. Go to Run in the menu and select Run 'app'.
+
 ### Development technologies
 This app is developed using [Android Views](https://developer.android.com/develop/ui/views/layout/declaring-layout) and follows the architectural principles described in the [Android Developers' guide to app architecture](https://developer.android.com/topic/architecture).
 
