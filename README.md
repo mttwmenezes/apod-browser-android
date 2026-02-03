@@ -23,7 +23,7 @@ This app makes use of the [APOD API](https://github.com/nasa/apod-api), which is
 3. Open the project on Android Studio.
 4. Select `Run > Run 'app'`.
 
-OBS: By default, the app utilizes the `DEMO_KEY`, a public API key intended for testing purposes, allowing access to all functionalities. If you prefer to use your own API key, which can be generated at [NASA's Open APIs website](https://api.nasa.gov/), simply open the `ApodService.kt` file and replace all instances of `BuildConfig.PUBLIC_KEY`.
+OBS: By default, the app utilizes the `DEMO_KEY`, a public API key intended for testing purposes, allowing access to all functionalities. If you prefer to use your own API key, which can be generated at [NASA's Open APIs website](https://api.nasa.gov/), simply open the `ApodService.kt` file and replace the value of the `API_KEY` constant.
 
 #### Staging build
 This project includes a staging build that allows you to test most of the app's features without relying on the actual APOD API. The staging build supports testing by providing the necessary data for the Latest screen.
