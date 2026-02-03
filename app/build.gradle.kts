@@ -8,6 +8,7 @@ plugins {
 
 android {
     namespace = "com.github.mttwmenezes.apodbrowser"
+    buildToolsVersion = "36.0.0"
     compileSdk = 36
 
     defaultConfig {
