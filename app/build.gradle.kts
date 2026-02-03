@@ -19,10 +19,6 @@ android {
         versionName = "stable-1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField("String", "BASE_URL", "\"https://api.nasa.gov/planetary/\"")
-        buildConfigField("String", "ENDPOINT", "\"apod\"")
-        buildConfigField("String", "PUBLIC_KEY", "\"DEMO_KEY\"")
     }
 
     buildTypes {

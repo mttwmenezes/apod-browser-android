@@ -17,7 +17,6 @@
 package com.github.mttwmenezes.apodbrowser.infrastructure.di.module
 
 import android.content.Context
-import com.github.mttwmenezes.apodbrowser.BuildConfig
 import com.github.mttwmenezes.apodbrowser.BuildType
 import com.github.mttwmenezes.apodbrowser.R
 import com.github.mttwmenezes.apodbrowser.data.repository.ApodRepository
@@ -45,7 +44,7 @@ object ViewModelModule {
 
     @Provides
     fun provideRetrofit(): Retrofit = Retrofit.Builder()
-        .baseUrl(BuildConfig.BASE_URL)
+        .baseUrl(ApodService.BASE_URL)
         .addConverterFactory(Json.asConverterFactory("application/json".toMediaType()))
         .build()
 
