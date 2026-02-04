@@ -1,5 +1,8 @@
 # APOD Browser Android
 
+[![Debug](https://github.com/mttwmenezes/apod-browser-android/actions/workflows/debug.yml/badge.svg?branch=master)](https://github.com/mttwmenezes/apod-browser-android/actions/workflows/debug.yml)
+[![Release](https://github.com/mttwmenezes/apod-browser-android/actions/workflows/release.yml/badge.svg)](https://github.com/mttwmenezes/apod-browser-android/actions/workflows/release.yml)
+
 Astronomy Picture of the Day client app for Android.
 
 ![APOD-Browser-Git-Hub-Hero.png](https://i.postimg.cc/90k7FR08/APOD-Browser-Git-Hub-Hero.png)
